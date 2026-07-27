@@ -1,0 +1,23 @@
+{
+  "platform": "Aboubakr Biomedical",
+  "version": "1.0.0",
+  "identity": "Aboubakr Ibrahim",
+  "mission": "Engineering healthcare through evidence, innovation, and continuous learning.",
+  "architecture": "modular",
+  "launchModules": [
+    {"id": "profile", "anchor": "about", "status": "active"},
+    {"id": "clinical-systems", "anchor": "experience", "status": "active"},
+    {"id": "medical-imaging", "anchor": "experience", "status": "active"},
+    {"id": "engineering-lab", "anchor": "projects", "status": "active"},
+    {"id": "device-quality", "anchor": "quality", "status": "active"},
+    {"id": "credentials", "anchor": "credentials", "status": "active"},
+    {"id": "professional-evidence", "anchor": "recommendation", "status": "active"},
+    {"id": "cv-system", "anchor": "cv-center", "status": "active"},
+    {"id": "collaboration", "anchor": "contact", "status": "active"}
+  ],
+  "futureModuleContract": {
+    "minimumVersion": "1.1.0",
+    "rule": "New modules extend navigation and content without changing existing module identifiers or evidence URLs.",
+    "reserved": ["equipment-explorer", "career-timeline", "knowledge-center", "publications", "multilingual", "services"]
+  }
+}
