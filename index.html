@@ -422,10 +422,10 @@
       </div>
 
       <div class="credential-filters reveal" role="group" aria-label="Filter credentials">
-        <button class="filter-button active" data-filter="all">All core credentials</button>
-        <button class="filter-button" data-filter="quality">Quality</button>
-        <button class="filter-button" data-filter="equipment">Equipment</button>
-        <button class="filter-button" data-filter="healthcare">Healthcare</button>
+        <button class="filter-button active" data-filter="all" aria-pressed="true">All core credentials</button>
+        <button class="filter-button" data-filter="quality" aria-pressed="false">Quality</button>
+        <button class="filter-button" data-filter="equipment" aria-pressed="false">Equipment</button>
+        <button class="filter-button" data-filter="healthcare" aria-pressed="false">Healthcare</button>
       </div>
 
       <div class="credential-grid">
@@ -537,7 +537,10 @@
           <div class="recommender">
             <div class="recommender-monogram">MD</div>
             <div><b>Supervisor Murat Demirer</b><span>Işık University · Biomedical Engineering</span></div>
-            <a href="assets/documents/Professor_Murat_Demirer_Recommendation.pdf" target="_blank">View letter ↗</a>
+            <div class="recommender-links">
+              <a href="assets/documents/Professor_Murat_Demirer_Recommendation.pdf" target="_blank" rel="noopener">View letter ↗</a>
+              <a href="https://www.linkedin.com/in/r-murat-d-49b18818/" target="_blank" rel="noopener" aria-label="Murat Rüştü on LinkedIn">LinkedIn ↗</a>
+            </div>
           </div>
         </article>
         <article class="recommendation-card recommendation-selden reveal">
@@ -547,7 +550,10 @@
           <div class="recommender">
             <div class="recommender-monogram">SÇ</div>
             <div><b>Asst. Prof. Selden Çepni</b><span>Işık University · Lecturer</span></div>
-            <a href="https://www.linkedin.com/in/dr-%C3%B6%C4%9Fr-%C3%BCyesi-selden-%C3%A7epni-11330b45/" target="_blank" rel="noopener">LinkedIn ↗</a>
+            <div class="recommender-links">
+              <a href="assets/documents/Selden_Cepni_Recommendation.svg" target="_blank" rel="noopener">View issued letter ↗</a>
+              <a href="https://www.linkedin.com/in/dr-%C3%B6%C4%9Fr-%C3%BCyesi-selden-%C3%A7epni-11330b45/" target="_blank" rel="noopener">LinkedIn ↗</a>
+            </div>
           </div>
         </article>
       </div>
