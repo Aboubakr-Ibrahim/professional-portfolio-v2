@@ -119,6 +119,20 @@ document.querySelector('#year').textContent = new Date().getFullYear();
 
 const heroVisual = document.querySelector('.hero-visual');
 const canAnimateDepth = window.matchMedia('(pointer: fine)').matches && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+const animatedVisuals = document.querySelectorAll(
+  '.monitor-ui, .sepsis-visual, .mini-wave, .poincare, .spectrogram, .calibration-chart, .quality-seal, .brand-mark-ab'
+);
+
+if (!prefersReducedMotion && 'IntersectionObserver' in window) {
+  const motionObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => entry.target.classList.toggle('motion-active', entry.isIntersecting));
+  }, { threshold: 0.18, rootMargin: '60px 0px' });
+  animatedVisuals.forEach(visual => motionObserver.observe(visual));
+} else {
+  animatedVisuals.forEach(visual => visual.classList.add('motion-active'));
+}
 
 if (heroVisual && canAnimateDepth) {
   heroVisual.addEventListener('pointermove', event => {
