@@ -198,10 +198,13 @@
             <path d="m8 29 28-14 28 14-28 14L8 29Z"/>
             <path d="M20 37v11c9 8 23 8 32 0V37M64 29v18"/>
           </svg>
-          <span>B.S.</span><i></i>
+          <i></i>
         </div>
         <div class="education-copy">
-          <p class="eyebrow"><span></span> Education record</p>
+          <div class="education-heading-row">
+            <p class="eyebrow"><span></span> Education record</p>
+            <span class="degree-badge">B.S.</span>
+          </div>
           <h3 id="education-title">Bachelor of Science in Biomedical Engineering</h3>
           <p><b>Işık University</b> · English-taught program · Istanbul, Türkiye</p>
           <div class="education-meta"><span>2019–2025</span><span>Graduated 30 September 2025</span><span>Degree documentation available</span></div>
@@ -410,7 +413,7 @@
       <div class="quality-layout">
         <div class="quality-copy reveal">
           <p class="eyebrow"><span></span> Quality mindset</p>
-          <h2>Reliability is engineered.<br><em>Responsibility is proven.</em></h2>
+          <h2><span>Reliability is engineered.</span><br><em>Responsibility is proven.</em></h2>
           <p>My quality training strengthens the way I approach both equipment and data: define the intended use, inspect systematically, document clearly, verify results, and never make claims beyond the evidence.</p>
           <div class="quality-list">
             <div><span>01</span><p><b>Medical-device QMS</b>ISO 13485 foundations, internal auditing, CAPA, and document control.</p></div>
@@ -629,6 +632,17 @@
     <button class="modal-close" aria-label="Close certificate preview">×</button>
     <img id="modal-image" src="" alt="">
     <div><span>Selected credential</span><h3 id="modal-title"></h3><p>Displayed as issued. Click outside the panel or press Escape to close.</p></div>
+  </dialog>
+
+  <dialog class="evidence-modal" id="evidence-modal" aria-labelledby="evidence-modal-title">
+    <button class="evidence-modal-close" aria-label="Close internship evidence preview">×</button>
+    <div class="evidence-modal-media"><img id="evidence-modal-image" src="" alt=""></div>
+    <div class="evidence-modal-copy">
+      <span>Supervised internship evidence</span>
+      <h3 id="evidence-modal-title"></h3>
+      <p id="evidence-modal-description"></p>
+      <small>Privacy-screened visual evidence shown for learning context. It does not imply independent clinical authorization or manufacturer certification.</small>
+    </div>
   </dialog>
 
   <script src="script.js"></script>
