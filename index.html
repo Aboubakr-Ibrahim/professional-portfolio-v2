@@ -607,10 +607,10 @@
           </div>
         </div>
         <div class="contact-facts">
-          <div><span>Base</span><b>Istanbul, Türkiye</b></div>
-          <div><span>Mobility</span><b>Open to global relocation</b></div>
-          <div><span>Travel</span><b>Available for field-service travel</b></div>
-          <div><span>Languages</span><b>Arabic · English · Turkish</b></div>
+          <div><i class="contact-icon" aria-hidden="true">⌖</i><span>Base</span><b>Istanbul, Türkiye</b></div>
+          <div><i class="contact-icon" aria-hidden="true">◎</i><span>Mobility</span><b>Open to global relocation</b></div>
+          <div><i class="contact-icon" aria-hidden="true">↗</i><span>Travel</span><b>Available for field-service travel</b></div>
+          <div class="language-fact"><i class="contact-icon" aria-hidden="true">文</i><span>Languages</span><b>Arabic — Native</b><small>English — Professional working proficiency</small><small>Turkish — Intermediate</small></div>
         </div>
       </div>
     </section>
@@ -636,11 +636,14 @@
 
   <dialog class="evidence-modal" id="evidence-modal" aria-labelledby="evidence-modal-title">
     <button class="evidence-modal-close" aria-label="Close internship evidence preview">×</button>
+    <button class="evidence-modal-nav evidence-modal-prev" aria-label="View previous internship photograph">‹</button>
+    <button class="evidence-modal-nav evidence-modal-next" aria-label="View next internship photograph">›</button>
     <div class="evidence-modal-media"><img id="evidence-modal-image" src="" alt=""></div>
     <div class="evidence-modal-copy">
       <span>Supervised internship evidence</span>
       <h3 id="evidence-modal-title"></h3>
       <p id="evidence-modal-description"></p>
+      <div class="evidence-modal-count" aria-live="polite"></div>
       <small>Privacy-screened visual evidence shown for learning context. It does not imply independent clinical authorization or manufacturer certification.</small>
     </div>
   </dialog>
