@@ -644,3 +644,187 @@ body::after{display:none!important;content:none!important}
 .hero-name{font-size:clamp(3.25rem,4.15vw,5.35rem)}.hero-capabilities{max-width:520px}.hero-motto{max-width:520px}
 @media(max-width:1050px){.hero{min-height:980px;padding-top:118px}.hero-content{width:min(620px,68vw)}.portrait-frame img{object-position:58% center}.hero::before{background:linear-gradient(90deg,rgba(1,6,13,.97),rgba(1,6,13,.85) 36%,rgba(1,6,13,.22) 72%),linear-gradient(0deg,rgba(1,6,13,.85),transparent 28%)}}
 @media(max-width:760px){.hero{min-height:980px;padding:101px 20px 50px}.hero-content{width:100%;max-width:560px}.hero::before{background:linear-gradient(180deg,rgba(1,6,13,.82),rgba(1,6,13,.64) 47%,rgba(1,6,13,.31) 68%,rgba(1,6,13,.82)),linear-gradient(90deg,rgba(1,6,13,.88),rgba(1,6,13,.2))}.portrait-frame img{object-position:61% center}.hero-identity{margin-bottom:22px}.hero-identity .brand-mark-ab{width:70px;height:58px}.hero-identity b{font-size:.95rem}.hero-identity p span{font-size:.77rem}.hero-capabilities{max-width:390px}.hero-motto{max-width:390px}}
+
+/* V2 motion system — signals reveal evidence instead of adding decorative noise. */
+.monitor-ui path,.mini-wave path{
+  stroke-dasharray:760;
+  stroke-dashoffset:760;
+  opacity:.72;
+}
+.motion-active.monitor-ui path{
+  animation:ecg-trace 4.8s cubic-bezier(.45,0,.2,1) infinite;
+}
+.motion-active.mini-wave path{
+  animation:ecg-trace 4.1s cubic-bezier(.45,0,.2,1) infinite;
+}
+.ecg-scan-dot,.wave-scan-dot{
+  fill:#dffcff;
+  opacity:0;
+  filter:drop-shadow(0 0 5px #13d9ec) drop-shadow(0 0 12px #13d9ec);
+}
+.ecg-scan-dot{
+  offset-path:path("M0 74h80l14-40 22 82 23-100 26 58h60l10-25 12 25h70l20-45 18 45h125");
+}
+.wave-scan-dot{
+  offset-path:path("M0 44h55l10-20 18 50 22-70 24 40h44l13-18 14 18h140");
+}
+.motion-active .ecg-scan-dot{animation:signal-beacon 4.8s cubic-bezier(.45,0,.2,1) infinite}
+.motion-active .wave-scan-dot{animation:signal-beacon 4.1s cubic-bezier(.45,0,.2,1) infinite}
+.monitor-ui::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:linear-gradient(90deg,transparent 0 45%,rgba(20,217,236,.08) 49%,rgba(223,252,255,.18) 50%,rgba(20,217,236,.08) 51%,transparent 55% 100%);
+  transform:translateX(-110%);
+}
+.motion-active.monitor-ui::after{animation:monitor-scan 5.6s ease-in-out infinite}
+
+.sepsis-visual .orbit-one,.sepsis-visual .orbit-two,.sepsis-visual .risk-core,.sepsis-visual .metric-node{animation-play-state:paused!important}
+.motion-active.sepsis-visual .orbit-one{animation:orbit-drift-reverse 34s linear infinite;animation-play-state:running!important}
+.motion-active.sepsis-visual .orbit-two{animation:spin 24s linear infinite;animation-play-state:running!important}
+.motion-active.sepsis-visual .risk-core{animation:risk-core-breathe 4.6s ease-in-out infinite;animation-play-state:running!important}
+.motion-active.sepsis-visual .metric-node{animation:metric-float 5.8s ease-in-out infinite;animation-play-state:running!important}
+.motion-active.sepsis-visual .node-b{animation-delay:-1.45s}
+.motion-active.sepsis-visual .node-c{animation-delay:-2.9s}
+.motion-active.sepsis-visual .node-d{animation-delay:-4.35s}
+.sepsis-visual::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:29%;
+  aspect-ratio:1;
+  border:1px solid rgba(20,217,236,.38);
+  border-radius:50%;
+  transform:translate(-50%,-50%) scale(.66);
+  opacity:0;
+}
+.motion-active.sepsis-visual::after{animation:risk-radar 4.6s ease-out infinite}
+
+.poincare::after{
+  content:"";
+  position:absolute;
+  left:20%;
+  top:77%;
+  width:63%;
+  height:2px;
+  background:linear-gradient(90deg,transparent,#edfaff 20% 80%,transparent);
+  box-shadow:0 0 10px rgba(237,250,255,.45);
+  transform:rotate(-45deg) scaleX(0);
+  transform-origin:left center;
+  opacity:.75;
+}
+.motion-active.poincare::after{animation:poincare-guide 4.8s ease-in-out infinite}
+.poincare i{animation-play-state:paused!important}
+.motion-active.poincare i{animation:poincare-point 3.4s ease-in-out infinite;animation-play-state:running!important}
+.motion-active.poincare i:nth-child(2){animation-delay:-.45s}
+.motion-active.poincare i:nth-child(3){animation-delay:-.9s}
+.motion-active.poincare i:nth-child(4){animation-delay:-1.35s}
+.motion-active.poincare i:nth-child(5){animation-delay:-1.8s}
+.motion-active.poincare i:nth-child(6){animation-delay:-2.25s}
+.motion-active.poincare i:nth-child(7){animation-delay:-2.7s}
+
+.spectrogram{position:relative;overflow:hidden;background-size:14px 100%,100% 100%;animation-play-state:paused!important}
+.motion-active.spectrogram{animation:spectrum-drift 7s linear infinite}
+.spectrogram::after{
+  content:"";
+  position:absolute;
+  inset:-20% -18%;
+  background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.2) 48%,rgba(160,111,255,.3) 51%,transparent 64%);
+  transform:translateX(-75%);
+  mix-blend-mode:screen;
+}
+.motion-active.spectrogram::after{animation:spectrum-sweep 5.2s ease-in-out infinite}
+
+.calibration-chart i,.calibration-chart::after{animation-play-state:paused!important}
+.motion-active.calibration-chart i{animation:bar-build 4.8s cubic-bezier(.2,.82,.25,1) infinite;animation-play-state:running!important}
+.motion-active.calibration-chart i:nth-child(2){animation-delay:.12s}
+.motion-active.calibration-chart i:nth-child(3){animation-delay:.24s}
+.motion-active.calibration-chart i:nth-child(4){animation-delay:.36s}
+.motion-active.calibration-chart i:nth-child(5){animation-delay:.48s}
+.motion-active.calibration-chart::after{animation:calibration-node 3.4s ease-in-out infinite;animation-play-state:running!important}
+.calibration-chart span{transform:rotate(-13deg) scaleX(0);transform-origin:left center}
+.motion-active.calibration-chart span{animation:calibration-line 4.8s cubic-bezier(.2,.82,.25,1) infinite}
+
+.quality-seal .seal-rings i,.quality-seal .seal-center,.quality-seal .seal-tag{animation-play-state:paused!important}
+.motion-active.quality-seal .seal-rings i:nth-child(1){animation:quality-orbit 38s linear infinite;animation-play-state:running!important}
+.motion-active.quality-seal .seal-rings i:nth-child(2){animation:quality-orbit-reverse 29s linear infinite;animation-play-state:running!important}
+.motion-active.quality-seal .seal-rings i:nth-child(3){animation:quality-ring-breathe 5.4s ease-in-out infinite;animation-play-state:running!important}
+.motion-active.quality-seal .seal-center{animation:quality-core 5.4s ease-in-out infinite;animation-play-state:running!important}
+.motion-active.quality-seal .seal-tag{animation:quality-tag 5.8s ease-in-out infinite;animation-play-state:running!important}
+.motion-active.quality-seal .tag-two{animation-delay:-1.45s}
+.motion-active.quality-seal .tag-three{animation-delay:-2.9s}
+.motion-active.quality-seal .tag-four{animation-delay:-4.35s}
+.quality-seal::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:58%;
+  aspect-ratio:1;
+  border-radius:50%;
+  background:conic-gradient(from 210deg,transparent 0 78%,rgba(244,184,63,.2) 88%,transparent 96%);
+  transform:translate(-50%,-50%);
+  opacity:0;
+  pointer-events:none;
+}
+.motion-active.quality-seal::after{animation:quality-scan 12s linear infinite}
+
+.brand-mark-ab .ab-pulse{animation:none;stroke-dasharray:180;stroke-dashoffset:180;opacity:.68}
+.motion-active.brand-mark-ab .ab-pulse{animation:logo-signal-flow 5.8s cubic-bezier(.45,0,.18,1) infinite}
+.brand-mark-ab .ab-outline{animation:none}
+.motion-active.brand-mark-ab .ab-outline{animation:logo-outline-breathe 5.8s ease-in-out infinite}
+.brand-mark-ab .ab-plus{transform-box:fill-box;transform-origin:center}
+.motion-active.brand-mark-ab .ab-plus{animation:logo-plus-pulse 5.8s ease-in-out infinite}
+.brand-mark-ab:hover .ab-pulse{animation-duration:3.2s}
+
+@keyframes ecg-trace{
+  0%{stroke-dashoffset:760;opacity:.36}
+  22%{opacity:1}
+  68%{stroke-dashoffset:0;opacity:1}
+  86%,100%{stroke-dashoffset:-760;opacity:.32}
+}
+@keyframes signal-beacon{
+  0%,8%{offset-distance:0%;opacity:0}
+  18%{opacity:1}
+  68%{offset-distance:100%;opacity:1}
+  76%,100%{offset-distance:100%;opacity:0}
+}
+@keyframes monitor-scan{0%,15%{transform:translateX(-110%);opacity:0}32%{opacity:1}68%{transform:translateX(110%);opacity:.65}100%{transform:translateX(110%);opacity:0}}
+@keyframes orbit-drift-reverse{to{transform:translate(-50%,-50%) rotate(-360deg)}}
+@keyframes risk-core-breathe{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-50%,-50%) scale(1.035);box-shadow:0 0 42px rgba(20,217,236,.2),inset 0 0 28px rgba(20,217,236,.08)}}
+@keyframes metric-float{50%{transform:translateY(-7px);border-color:rgba(20,217,236,.38);box-shadow:0 10px 28px rgba(0,0,0,.22),0 0 18px rgba(20,217,236,.08)}}
+@keyframes risk-radar{0%{transform:translate(-50%,-50%) scale(.66);opacity:.48}75%,100%{transform:translate(-50%,-50%) scale(2.15);opacity:0}}
+@keyframes poincare-guide{0%,12%{transform:rotate(-45deg) scaleX(0);opacity:0}42%,74%{transform:rotate(-45deg) scaleX(1);opacity:.72}100%{transform:rotate(-45deg) scaleX(1);opacity:0}}
+@keyframes poincare-point{50%{transform:translate(2px,-4px) scale(1.42);background:#c7b4ff;box-shadow:0 0 19px rgba(155,123,255,.88)}}
+@keyframes spectrum-drift{to{background-position:42px 0,0 0}}
+@keyframes spectrum-sweep{0%,12%{transform:translateX(-75%);opacity:0}32%{opacity:1}72%{transform:translateX(75%);opacity:.7}100%{transform:translateX(75%);opacity:0}}
+@keyframes bar-build{0%,12%{transform:scaleY(.08);opacity:.38}50%,78%{transform:scaleY(1);opacity:1}100%{transform:scaleY(.08);opacity:.38}}
+@keyframes calibration-line{0%,14%{transform:rotate(-13deg) scaleX(0);opacity:.3}58%,82%{transform:rotate(-13deg) scaleX(1);opacity:1}100%{transform:rotate(-13deg) scaleX(0);opacity:.3}}
+@keyframes quality-orbit{to{transform:translate(-50%,-50%) rotate(360deg)}}
+@keyframes quality-orbit-reverse{to{transform:translate(-50%,-50%) rotate(-360deg)}}
+@keyframes quality-ring-breathe{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-50%,-50%) scale(1.035);opacity:.96;filter:drop-shadow(0 0 9px rgba(244,184,63,.24))}}
+@keyframes quality-core{50%{transform:scale(1.035);filter:drop-shadow(0 0 23px rgba(244,184,63,.22))}}
+@keyframes quality-tag{50%{transform:translateY(-7px);border-color:rgba(244,184,63,.66);box-shadow:0 0 19px rgba(244,184,63,.12)}}
+@keyframes quality-scan{0%{transform:translate(-50%,-50%) rotate(0deg);opacity:0}18%,82%{opacity:.86}100%{transform:translate(-50%,-50%) rotate(360deg);opacity:0}}
+@keyframes logo-signal-flow{
+  0%{stroke-dashoffset:180;opacity:.48}
+  20%{opacity:1}
+  58%,78%{stroke-dashoffset:0;opacity:1}
+  100%{stroke-dashoffset:-180;opacity:.52}
+}
+@keyframes logo-outline-breathe{50%{stroke:#fff;filter:drop-shadow(0 0 5px rgba(151,211,239,.32))}}
+@keyframes logo-plus-pulse{0%,72%,100%{transform:scale(1);opacity:.82}82%{transform:scale(1.28);opacity:1;filter:drop-shadow(0 0 9px #21e0ef)}}
+
+@media(pointer:coarse){
+  .motion-active.sepsis-visual .metric-node,.motion-active.quality-seal .seal-tag{animation:none}
+  .motion-active.quality-seal .seal-rings i:nth-child(1){animation-duration:54s}
+  .motion-active.quality-seal .seal-rings i:nth-child(2){animation-duration:46s}
+}
+@media(prefers-reduced-motion:reduce){
+  .monitor-ui path,.mini-wave path{stroke-dashoffset:0;opacity:1}
+  .ecg-scan-dot,.wave-scan-dot,.monitor-ui::after,.sepsis-visual::after,.quality-seal::after{display:none}
+  .monitor-ui path,.mini-wave path,.sepsis-visual *,.poincare *,.spectrogram,.spectrogram::after,.calibration-chart *,.calibration-chart::after,.quality-seal *,.brand-mark-ab *{animation:none!important}
+  .calibration-chart span{transform:rotate(-13deg) scaleX(1)}
+}
