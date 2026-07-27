@@ -93,33 +93,72 @@ navSections.forEach(section => navigationObserver.observe(section));
 
 const filterButtons = document.querySelectorAll('.filter-button');
 const credentials = document.querySelectorAll('.credential-card');
+const credentialGrid = document.querySelector('.credential-grid');
 
 filterButtons.forEach(button => button.addEventListener('click', () => {
+  if (button.classList.contains('active')) return;
   filterButtons.forEach(item => item.classList.remove('active'));
   button.classList.add('active');
+  filterButtons.forEach(item => item.setAttribute('aria-pressed', String(item === button)));
   const filter = button.dataset.filter;
-  credentials.forEach(card => {
-    card.hidden = filter !== 'all' && card.dataset.category !== filter;
+  credentialGrid?.classList.add('is-filtering');
+  credentials.forEach((card, index) => {
+    const visible = filter === 'all' || card.dataset.category === filter;
+    card.classList.toggle('is-filtered-out', !visible);
+    card.style.setProperty('--filter-order', index);
   });
+  window.setTimeout(() => {
+    credentials.forEach(card => {
+      card.hidden = card.classList.contains('is-filtered-out');
+    });
+    credentialGrid?.classList.remove('is-filtering');
+    requestAnimationFrame(() => credentials.forEach(card => {
+      if (!card.hidden) card.classList.add('filter-enter');
+    }));
+    window.setTimeout(() => credentials.forEach(card => card.classList.remove('filter-enter')), 520);
+  }, window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 220);
 }));
 
 const modal = document.querySelector('#credential-modal');
 const modalImage = document.querySelector('#modal-image');
 const modalTitle = document.querySelector('#modal-title');
+let modalInvoker = null;
+
+const closeCredentialModal = () => {
+  if (!modal?.open || modal.classList.contains('is-closing')) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    modal.close();
+    modalInvoker?.focus();
+    return;
+  }
+  modal.classList.add('is-closing');
+  window.setTimeout(() => {
+    modal.close();
+    modal.classList.remove('is-closing', 'is-presented');
+    modalInvoker?.focus();
+  }, 240);
+};
 
 credentials.forEach(card => card.addEventListener('click', () => {
+  modalInvoker = card;
   modalImage.src = card.dataset.image;
   modalImage.alt = card.dataset.title;
   modalTitle.textContent = card.dataset.title;
   modal.showModal();
+  requestAnimationFrame(() => modal.classList.add('is-presented'));
 }));
 
-document.querySelector('.modal-close')?.addEventListener('click', () => modal.close());
+document.querySelector('.modal-close')?.addEventListener('click', closeCredentialModal);
 modal.addEventListener('click', event => {
   const bounds = modal.getBoundingClientRect();
   const outside = event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom;
-  if (outside) modal.close();
+  if (outside) closeCredentialModal();
 });
+modal.addEventListener('cancel', event => {
+  event.preventDefault();
+  closeCredentialModal();
+});
+modal.addEventListener('close', () => modal.classList.remove('is-presented', 'is-closing'));
 
 document.querySelector('#year').textContent = new Date().getFullYear();
 
@@ -178,7 +217,7 @@ if (heroVisual && canAnimateDepth) {
   });
 }
 
-const motionTargets = document.querySelectorAll('.pillar, .experience-card, .project-card, .credential-card, .skill-group, .cv-primary, .cv-variants a, .evidence-item, .recommendation-card, .quality-list > div, .module-card');
+const motionTargets = document.querySelectorAll('.pillar, .project-card, .credential-card, .cv-primary, .cv-variants a, .evidence-item, .quality-list > div, .module-card');
 motionTargets.forEach((target, index) => {
   target.classList.add('motion-card');
   if (target.classList.contains('reveal')) target.style.transitionDelay = `${Math.min(index % 4, 3) * 55}ms`;
@@ -191,6 +230,40 @@ motionTargets.forEach((target, index) => {
 });
 
 document.querySelectorAll('.button').forEach(button => button.classList.add('magnetic'));
+
+document.querySelectorAll('.experience-card details, .credential-archive').forEach(details => {
+  const summary = details.querySelector(':scope > summary');
+  if (!summary) return;
+
+  summary.addEventListener('click', event => {
+    event.preventDefault();
+    const opening = !details.open;
+    if (prefersReducedMotion) {
+      details.open = opening;
+      return;
+    }
+
+    const startHeight = `${details.offsetHeight}px`;
+    if (opening) details.open = true;
+    const summaryHeight = summary.offsetHeight + parseFloat(getComputedStyle(details).paddingTop || 0);
+    const endHeight = opening ? `${details.scrollHeight}px` : `${summaryHeight}px`;
+
+    details.style.height = startHeight;
+    details.style.overflow = 'clip';
+    requestAnimationFrame(() => {
+      details.style.height = endHeight;
+      details.classList.toggle('is-expanding', opening);
+      details.classList.toggle('is-collapsing', !opening);
+    });
+
+    details.addEventListener('transitionend', () => {
+      if (!opening) details.open = false;
+      details.style.height = '';
+      details.style.overflow = '';
+      details.classList.remove('is-expanding', 'is-collapsing');
+    }, { once: true });
+  });
+});
 
 if (canAnimateDepth) {
   motionTargets.forEach(target => {
