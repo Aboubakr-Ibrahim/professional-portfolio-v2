@@ -1191,3 +1191,217 @@ body.motion-paused *,body.motion-paused *::before,body.motion-paused *::after{an
   .hero-ready .hero-sequence>*,.hero-ready .portrait-frame img{animation:none;transition:none}
   .reveal{opacity:1;transform:none;filter:none;transition:none}
 }
+
+/* V2.1 refinement — calmer luxury, clearer interactions, smoother evidence. */
+.hero-ready .hero-name span{
+  animation:name-spectrum 2.8s var(--ease-cinematic) .35s 1 both;
+}
+.hero-ready .hero-name span:last-child{animation-delay:.5s}
+.hero-ready .hero-identity-lockup .ab-pulse{
+  stroke-dasharray:150;
+  animation:logo-signal-refined 6.8s var(--ease-signal) .2s infinite;
+}
+.hero-visual .card-signal,.hero-visual .card-quality{
+  display:grid;
+  z-index:8;
+  width:min(250px,20vw);
+  min-width:205px;
+  padding:18px 20px;
+  border:1px solid rgba(145,218,235,.24);
+  border-radius:19px;
+  background:linear-gradient(145deg,rgba(13,34,50,.58),rgba(5,17,29,.7));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 20px 65px rgba(0,0,0,.25);
+  backdrop-filter:blur(22px) saturate(1.12);
+  -webkit-backdrop-filter:blur(22px) saturate(1.12);
+}
+.hero-visual .card-signal{
+  left:auto;
+  right:34%;
+  top:20%;
+  color:#49e0ef;
+  transform:translate3d(var(--signal-x),var(--signal-y),0);
+  animation:hero-glass-float 8.5s ease-in-out infinite;
+}
+.hero-visual .card-quality{
+  left:auto;
+  right:27%;
+  bottom:17%;
+  color:#f2bc55;
+  grid-template-columns:auto 1fr;
+  transform:translate3d(var(--quality-x),var(--quality-y),0);
+  animation:hero-glass-float 9.4s -3.2s ease-in-out infinite;
+}
+.hero-visual .card-imaging{display:none}
+.floating-card .card-kicker{color:#8aa5b4;letter-spacing:.14em}
+.floating-card svg{filter:drop-shadow(0 0 8px currentColor)}
+.card-signal svg path{stroke-dasharray:320;stroke-dashoffset:320;animation:hero-card-signal 5.8s var(--ease-signal) infinite}
+.card-quality .quality-icon{filter:drop-shadow(0 0 8px rgba(242,188,85,.6));animation:quality-check 5.2s ease-in-out infinite}
+
+.module-card .module-icon{
+  position:relative;
+  isolation:isolate;
+}
+.module-card .module-icon::after{
+  content:"";
+  position:absolute;
+  inset:7px;
+  z-index:-1;
+  border-radius:50%;
+  background:currentColor;
+  opacity:.08;
+  filter:blur(7px);
+  transform:scale(.55);
+  transition:transform var(--motion-ui) var(--ease-cinematic),opacity var(--motion-ui);
+}
+.module-card:hover .module-icon::after{opacity:.2;transform:scale(1.25)}
+.module-card:hover .module-icon svg{animation:module-icon-refined 1.9s ease-in-out infinite}
+.module-card:hover .module-icon path{animation:module-icon-draw 2.4s var(--ease-signal) infinite}
+.module-card:focus-visible{outline:2px solid var(--module-color,var(--cyan));outline-offset:4px}
+
+.credential-grid{
+  transition:opacity 220ms ease,transform 220ms var(--ease-cinematic);
+}
+.credential-grid.is-filtering{opacity:.72;transform:translateY(4px)}
+.credential-card{
+  transition:
+    opacity 220ms ease,
+    transform var(--motion-ui) var(--ease-cinematic),
+    border-color var(--motion-ui),
+    box-shadow var(--motion-ui);
+}
+.credential-card.is-filtered-out{opacity:0;transform:translateY(12px) scale(.975);pointer-events:none}
+.credential-card.filter-enter{
+  animation:credential-filter-enter 480ms var(--ease-cinematic) both;
+  animation-delay:min(calc(var(--filter-order,0) * 34ms),180ms);
+}
+
+.credential-modal{
+  opacity:0;
+  transform:translateY(22px) scale(.965);
+  border-radius:24px;
+  overflow:hidden;
+  transition:opacity 260ms ease,transform 360ms var(--ease-cinematic),display 260ms allow-discrete,overlay 260ms allow-discrete;
+}
+.credential-modal::backdrop{
+  opacity:0;
+  transition:opacity 260ms ease,display 260ms allow-discrete,overlay 260ms allow-discrete;
+}
+.credential-modal[open].is-presented{opacity:1;transform:none}
+.credential-modal[open].is-presented::backdrop{opacity:1}
+.credential-modal.is-closing{opacity:0;transform:translateY(12px) scale(.98)}
+.modal-close{
+  transition:transform var(--motion-snap) var(--ease-cinematic),background var(--motion-snap),color var(--motion-snap);
+}
+.modal-close:hover{transform:rotate(90deg) scale(1.06)}
+
+.experience-card details,.credential-archive{
+  transition:height 440ms var(--ease-cinematic);
+}
+.experience-card details > :not(summary),.credential-archive > :not(summary){
+  transform-origin:top;
+  animation:details-content-in 420ms var(--ease-cinematic) both;
+}
+.experience-card details.is-collapsing > :not(summary),.credential-archive.is-collapsing > :not(summary){
+  animation:details-content-out 210ms ease both;
+}
+details summary::after{
+  transition:transform var(--motion-ui) var(--ease-cinematic),color var(--motion-ui);
+}
+details[open] summary::after{transform:rotate(45deg)}
+
+.recommendation-card{
+  transition:transform var(--motion-ui) var(--ease-cinematic),border-color var(--motion-ui),box-shadow var(--motion-ui);
+}
+.recommendation-card::after{
+  content:"";
+  position:absolute;
+  inset:-45% auto auto -20%;
+  width:68%;
+  aspect-ratio:1;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(94,156,255,.12),transparent 68%);
+  transform:translate3d(-12%,0,0);
+  transition:transform 900ms var(--ease-cinematic),opacity 600ms;
+  pointer-events:none;
+}
+.recommendation-card:hover::after{transform:translate3d(34%,18%,0);opacity:1}
+.recommendation-card:hover{transform:translateY(-6px)}
+.recommender-links{
+  margin-left:auto;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+}
+.recommender-links a{
+  margin:0!important;
+  padding:8px 11px;
+  border:1px solid rgba(117,185,226,.18);
+  border-radius:999px;
+  background:rgba(8,27,42,.62);
+  transition:transform var(--motion-snap) var(--ease-cinematic),border-color var(--motion-snap),background var(--motion-snap);
+}
+.recommender-links a:hover{transform:translateY(-2px);border-color:#5e9cff;background:rgba(30,65,104,.38)}
+
+@keyframes logo-signal-refined{
+  0%,9%{stroke-dashoffset:150;opacity:.42}
+  32%,72%{stroke-dashoffset:0;opacity:1}
+  90%,100%{stroke-dashoffset:-150;opacity:.46}
+}
+@keyframes hero-glass-float{
+  0%,100%{translate:0 0}
+  50%{translate:0 -7px}
+}
+@keyframes hero-card-signal{
+  0%,15%{stroke-dashoffset:320;opacity:.35}
+  48%,78%{stroke-dashoffset:0;opacity:1}
+  100%{stroke-dashoffset:-320;opacity:.35}
+}
+@keyframes quality-check{
+  0%,70%,100%{transform:scale(1);opacity:.82}
+  82%{transform:scale(1.13);opacity:1}
+}
+@keyframes module-icon-refined{
+  0%,100%{transform:translateY(0) scale(1)}
+  50%{transform:translateY(-3px) scale(1.035)}
+}
+@keyframes credential-filter-enter{
+  from{opacity:0;transform:translateY(16px) scale(.975)}
+  to{opacity:1;transform:none}
+}
+@keyframes details-content-in{
+  from{opacity:0;transform:translateY(-8px)}
+  to{opacity:1;transform:none}
+}
+@keyframes details-content-out{
+  to{opacity:0;transform:translateY(-6px)}
+}
+
+@media(max-width:1050px){
+  .hero-visual .card-signal{right:25%;top:24%}
+  .hero-visual .card-quality{right:18%;bottom:13%}
+}
+@media(max-width:760px){
+  .hero-visual .floating-card{display:none}
+  .recommender-links{width:100%;margin-left:64px;justify-content:flex-start}
+  .primary-nav a{
+    opacity:0;
+    transform:translateX(18px);
+    transition:opacity 280ms ease,transform 380ms var(--ease-cinematic),color 200ms;
+  }
+  .primary-nav.open a{opacity:1;transform:none}
+  .primary-nav.open a:nth-child(1){transition-delay:40ms}
+  .primary-nav.open a:nth-child(2){transition-delay:75ms}
+  .primary-nav.open a:nth-child(3){transition-delay:110ms}
+  .primary-nav.open a:nth-child(4){transition-delay:145ms}
+  .primary-nav.open a:nth-child(5){transition-delay:180ms}
+  .primary-nav.open a:nth-child(6){transition-delay:215ms}
+}
+@media(prefers-reduced-motion:reduce){
+  .hero-ready .hero-name span,.hero-ready .hero-identity-lockup .ab-pulse,
+  .card-signal svg path,.card-quality .quality-icon,.hero-visual .floating-card,
+  .credential-card.filter-enter,.experience-card details > :not(summary),
+  .credential-archive > :not(summary){animation:none!important}
+  .credential-modal,.credential-modal::backdrop,.experience-card details,.credential-archive{transition:none!important}
+}
