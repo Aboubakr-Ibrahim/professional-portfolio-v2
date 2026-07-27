@@ -168,6 +168,66 @@ modal.addEventListener('cancel', event => {
 });
 modal.addEventListener('close', () => modal.classList.remove('is-presented', 'is-closing'));
 
+const evidenceModal = document.querySelector('#evidence-modal');
+const evidenceModalImage = document.querySelector('#evidence-modal-image');
+const evidenceModalTitle = document.querySelector('#evidence-modal-title');
+const evidenceModalDescription = document.querySelector('#evidence-modal-description');
+let evidenceInvoker = null;
+
+const closeEvidenceModal = () => {
+  if (!evidenceModal?.open || evidenceModal.classList.contains('is-closing')) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    evidenceModal.close();
+    evidenceInvoker?.focus();
+    return;
+  }
+  evidenceModal.classList.add('is-closing');
+  window.setTimeout(() => {
+    evidenceModal.close();
+    evidenceModal.classList.remove('is-closing', 'is-presented');
+    evidenceInvoker?.focus();
+  }, 260);
+};
+
+document.querySelectorAll('.evidence-item').forEach(item => {
+  const image = item.querySelector('img');
+  const title = item.querySelector('figcaption b')?.textContent?.trim() || 'Internship evidence';
+  const description = item.querySelector('figcaption span')?.textContent?.trim() || '';
+  item.tabIndex = 0;
+  item.setAttribute('role', 'button');
+  item.setAttribute('aria-label', `Open ${title} internship evidence`);
+
+  const openEvidence = () => {
+    if (!evidenceModal || !image) return;
+    evidenceInvoker = item;
+    evidenceModalImage.src = image.currentSrc || image.src;
+    evidenceModalImage.alt = image.alt;
+    evidenceModalTitle.textContent = title;
+    evidenceModalDescription.textContent = description;
+    evidenceModal.showModal();
+    requestAnimationFrame(() => evidenceModal.classList.add('is-presented'));
+  };
+
+  item.addEventListener('click', openEvidence);
+  item.addEventListener('keydown', event => {
+    if (event.key !== 'Enter' && event.key !== ' ') return;
+    event.preventDefault();
+    openEvidence();
+  });
+});
+
+document.querySelector('.evidence-modal-close')?.addEventListener('click', closeEvidenceModal);
+evidenceModal?.addEventListener('click', event => {
+  const bounds = evidenceModal.getBoundingClientRect();
+  const outside = event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom;
+  if (outside) closeEvidenceModal();
+});
+evidenceModal?.addEventListener('cancel', event => {
+  event.preventDefault();
+  closeEvidenceModal();
+});
+evidenceModal?.addEventListener('close', () => evidenceModal.classList.remove('is-presented', 'is-closing'));
+
 document.querySelector('#year').textContent = new Date().getFullYear();
 
 const heroVisual = document.querySelector('.hero-visual');
