@@ -172,7 +172,10 @@ const evidenceModal = document.querySelector('#evidence-modal');
 const evidenceModalImage = document.querySelector('#evidence-modal-image');
 const evidenceModalTitle = document.querySelector('#evidence-modal-title');
 const evidenceModalDescription = document.querySelector('#evidence-modal-description');
+const evidenceModalCount = document.querySelector('.evidence-modal-count');
+const evidenceItems = [...document.querySelectorAll('.evidence-item')];
 let evidenceInvoker = null;
+let evidenceIndex = 0;
 
 const closeEvidenceModal = () => {
   if (!evidenceModal?.open || evidenceModal.classList.contains('is-closing')) return;
@@ -189,10 +192,28 @@ const closeEvidenceModal = () => {
   }, 260);
 };
 
-document.querySelectorAll('.evidence-item').forEach(item => {
+const presentEvidence = index => {
+  if (!evidenceItems.length) return;
+  evidenceIndex = (index + evidenceItems.length) % evidenceItems.length;
+  const item = evidenceItems[evidenceIndex];
   const image = item.querySelector('img');
   const title = item.querySelector('figcaption b')?.textContent?.trim() || 'Internship evidence';
   const description = item.querySelector('figcaption span')?.textContent?.trim() || '';
+  if (!image) return;
+  evidenceModalImage.classList.add('is-changing');
+  window.setTimeout(() => {
+    evidenceModalImage.src = image.currentSrc || image.src;
+    evidenceModalImage.alt = image.alt;
+    evidenceModalTitle.textContent = title;
+    evidenceModalDescription.textContent = description;
+    evidenceModalCount.textContent = `${String(evidenceIndex + 1).padStart(2, '0')} / ${String(evidenceItems.length).padStart(2, '0')}`;
+    evidenceModalImage.classList.remove('is-changing');
+  }, evidenceModal?.open ? 150 : 0);
+};
+
+evidenceItems.forEach((item, index) => {
+  const image = item.querySelector('img');
+  const title = item.querySelector('figcaption b')?.textContent?.trim() || 'Internship evidence';
   item.tabIndex = 0;
   item.setAttribute('role', 'button');
   item.setAttribute('aria-label', `Open ${title} internship evidence`);
@@ -200,10 +221,7 @@ document.querySelectorAll('.evidence-item').forEach(item => {
   const openEvidence = () => {
     if (!evidenceModal || !image) return;
     evidenceInvoker = item;
-    evidenceModalImage.src = image.currentSrc || image.src;
-    evidenceModalImage.alt = image.alt;
-    evidenceModalTitle.textContent = title;
-    evidenceModalDescription.textContent = description;
+    presentEvidence(index);
     evidenceModal.showModal();
     requestAnimationFrame(() => evidenceModal.classList.add('is-presented'));
   };
@@ -217,6 +235,8 @@ document.querySelectorAll('.evidence-item').forEach(item => {
 });
 
 document.querySelector('.evidence-modal-close')?.addEventListener('click', closeEvidenceModal);
+document.querySelector('.evidence-modal-prev')?.addEventListener('click', () => presentEvidence(evidenceIndex - 1));
+document.querySelector('.evidence-modal-next')?.addEventListener('click', () => presentEvidence(evidenceIndex + 1));
 evidenceModal?.addEventListener('click', event => {
   const bounds = evidenceModal.getBoundingClientRect();
   const outside = event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom;
@@ -225,6 +245,10 @@ evidenceModal?.addEventListener('click', event => {
 evidenceModal?.addEventListener('cancel', event => {
   event.preventDefault();
   closeEvidenceModal();
+});
+evidenceModal?.addEventListener('keydown', event => {
+  if (event.key === 'ArrowLeft') presentEvidence(evidenceIndex - 1);
+  if (event.key === 'ArrowRight') presentEvidence(evidenceIndex + 1);
 });
 evidenceModal?.addEventListener('close', () => evidenceModal.classList.remove('is-presented', 'is-closing'));
 
@@ -299,7 +323,7 @@ motionTargets.forEach((target, index) => {
 
 document.querySelectorAll('.button').forEach(button => button.classList.add('magnetic'));
 
-document.querySelectorAll('.experience-card details, .credential-archive').forEach(details => {
+document.querySelectorAll('.credential-archive').forEach(details => {
   const summary = details.querySelector(':scope > summary');
   if (!summary) return;
 
