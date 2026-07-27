@@ -133,19 +133,49 @@ const modalTitle = document.querySelector('#modal-title');
 const modalCount = document.querySelector('.credential-modal-count');
 let modalInvoker = null;
 let credentialIndex = 0;
+let modalScrollPosition = 0;
+let modalScrollLocked = false;
+
+const lockPageForModal = () => {
+  if (modalScrollLocked) return;
+  modalScrollPosition = window.scrollY;
+  modalScrollLocked = true;
+  document.body.classList.add('modal-open');
+  document.body.style.position = 'fixed';
+  document.body.style.top = `-${modalScrollPosition}px`;
+  document.body.style.left = '0';
+  document.body.style.right = '0';
+  document.body.style.width = '100%';
+};
+
+const unlockPageAfterModal = invoker => {
+  if (!modalScrollLocked) {
+    invoker?.focus({ preventScroll: true });
+    return;
+  }
+  document.body.classList.remove('modal-open');
+  document.body.style.position = '';
+  document.body.style.top = '';
+  document.body.style.left = '';
+  document.body.style.right = '';
+  document.body.style.width = '';
+  window.scrollTo({ top: modalScrollPosition, left: 0, behavior: 'auto' });
+  modalScrollLocked = false;
+  requestAnimationFrame(() => invoker?.focus({ preventScroll: true }));
+};
 
 const closeCredentialModal = () => {
   if (!modal?.open || modal.classList.contains('is-closing')) return;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     modal.close();
-    modalInvoker?.focus();
+    unlockPageAfterModal(modalInvoker);
     return;
   }
   modal.classList.add('is-closing');
   window.setTimeout(() => {
     modal.close();
     modal.classList.remove('is-closing', 'is-presented');
-    modalInvoker?.focus();
+    unlockPageAfterModal(modalInvoker);
   }, 240);
 };
 
@@ -170,6 +200,7 @@ credentials.forEach(card => card.addEventListener('click', () => {
   const available = visibleCredentials();
   const index = available.indexOf(card);
   presentCredential(index < 0 ? 0 : index);
+  lockPageForModal();
   modal.showModal();
   requestAnimationFrame(() => modal.classList.add('is-presented'));
 }));
@@ -205,14 +236,14 @@ const closeEvidenceModal = () => {
   if (!evidenceModal?.open || evidenceModal.classList.contains('is-closing')) return;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     evidenceModal.close();
-    evidenceInvoker?.focus();
+    unlockPageAfterModal(evidenceInvoker);
     return;
   }
   evidenceModal.classList.add('is-closing');
   window.setTimeout(() => {
     evidenceModal.close();
     evidenceModal.classList.remove('is-closing', 'is-presented');
-    evidenceInvoker?.focus();
+    unlockPageAfterModal(evidenceInvoker);
   }, 260);
 };
 
@@ -246,6 +277,7 @@ evidenceItems.forEach((item, index) => {
     if (!evidenceModal || !image) return;
     evidenceInvoker = item;
     presentEvidence(index);
+    lockPageForModal();
     evidenceModal.showModal();
     requestAnimationFrame(() => evidenceModal.classList.add('is-presented'));
   };
