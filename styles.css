@@ -1620,3 +1620,134 @@ body{
 @media(prefers-reduced-motion:reduce){
   .scroll-progress,.education-sigil .graduation-cap-icon{animation:none!important}
 }
+
+/* V2.2 — animated identity and internship evidence room. */
+.hero-ready .hero-name span{
+  background:linear-gradient(98deg,#effcff 0%,#40d9f1 23%,#6ba6ff 48%,#a479f4 70%,#efb85d 100%)!important;
+  background-size:220% 100%!important;
+  animation:hero-name-spectrum 8.5s ease-in-out infinite!important;
+}
+.hero-ready .hero-name span:last-child{animation-delay:-4.25s!important}
+@keyframes hero-name-spectrum{
+  0%,100%{background-position:0% 50%;filter:drop-shadow(0 0 12px rgba(64,217,241,.12))}
+  50%{background-position:100% 50%;filter:drop-shadow(0 0 20px rgba(164,121,244,.2))}
+}
+
+.education-heading-row{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.education-heading-row .eyebrow{margin:0}
+.degree-badge{
+  display:inline-grid;place-items:center;min-width:48px;padding:6px 11px;
+  border:1px solid rgba(239,181,74,.42);border-radius:999px;
+  color:#ffd580;background:rgba(239,181,74,.08);
+  font:700 .68rem var(--font-head);letter-spacing:.12em;
+  box-shadow:0 0 18px rgba(239,181,74,.08);
+}
+
+.project-featured h3{
+  color:#f4bd57;
+  text-shadow:0 0 26px rgba(239,181,74,.13);
+}
+
+.quality-copy h2 span,.quality-copy h2 em{
+  display:inline-block;color:transparent;
+  -webkit-background-clip:text;background-clip:text;
+  background-size:220% 100%;
+  animation:quality-word-spectrum 8s ease-in-out infinite;
+}
+.quality-copy h2 span{
+  background-image:linear-gradient(96deg,#effcff 0%,#63dced 30%,#aa84ff 58%,#f4bd57 82%,#effcff 100%);
+}
+.quality-copy h2 em{
+  background-image:linear-gradient(96deg,#f4bd57 0%,#dce99e 28%,#74dfc6 56%,#63dced 78%,#f4bd57 100%);
+  animation-delay:-4s;
+}
+@keyframes quality-word-spectrum{0%,100%{background-position:0 50%}50%{background-position:100% 50%}}
+
+.evidence-gallery{
+  grid-template-columns:repeat(12,minmax(0,1fr));
+  grid-auto-rows:auto;
+  gap:16px;
+}
+.evidence-intro{
+  grid-column:1/-1;
+  padding:30px 32px;margin-bottom:8px;
+  border:1px solid rgba(82,207,232,.2);border-radius:20px;
+  background:linear-gradient(135deg,rgba(9,31,46,.84),rgba(15,24,49,.78));
+}
+.evidence-item,.evidence-wide,.evidence-landscape{
+  grid-column:span 4;grid-row:auto;
+  height:410px;border-radius:20px;cursor:zoom-in;
+  border:1px solid rgba(93,202,225,.2);
+  box-shadow:0 18px 44px rgba(0,0,0,.18);
+  isolation:isolate;
+}
+.evidence-item:nth-of-type(1),.evidence-item:nth-of-type(8){grid-column:span 6}
+.evidence-item::before{
+  content:counter(evidence,decimal-leading-zero);
+  position:absolute;z-index:3;top:18px;left:18px;
+  min-width:38px;padding:7px 9px;border-radius:999px;
+  color:#d6f8ff;background:rgba(3,17,28,.68);
+  border:1px solid rgba(105,211,235,.26);backdrop-filter:blur(12px);
+  font:650 .58rem var(--font-head);letter-spacing:.12em;text-align:center;
+}
+.evidence-gallery{counter-reset:evidence}
+.evidence-item{counter-increment:evidence}
+.evidence-item::after{inset:34% 0 0;background:linear-gradient(transparent,rgba(3,11,19,.98))}
+.evidence-item img{transition:transform .75s var(--ease-cinematic),filter .55s ease}
+.evidence-item:hover img{transform:scale(1.065);filter:saturate(1.12) contrast(1.05)}
+.evidence-item figcaption{left:22px;right:22px;bottom:20px;gap:6px}
+.evidence-item figcaption b{font-size:1.05rem;color:#f4fbff}
+.evidence-item figcaption span{font-size:.75rem;line-height:1.5;color:#afc8d5;max-width:36ch}
+.evidence-item figcaption::after{
+  content:"Open evidence ↗";margin-top:7px;color:#f2bd5e;
+  font:650 .6rem var(--font-head);letter-spacing:.11em;text-transform:uppercase;
+  opacity:0;transform:translateY(5px);transition:.3s ease;
+}
+.evidence-item:hover figcaption::after,.evidence-item:focus-visible figcaption::after{opacity:1;transform:none}
+.evidence-item:focus-visible{outline:2px solid var(--gold);outline-offset:4px}
+
+.evidence-modal{
+  width:min(1180px,94vw);max-height:92vh;padding:0;
+  border:1px solid rgba(90,207,231,.3);border-radius:22px;
+  color:var(--text);background:#06131f;
+  box-shadow:0 35px 120px rgba(0,0,0,.68);
+  opacity:0;transform:translateY(14px) scale(.985);
+  transition:opacity .28s ease,transform .36s var(--ease-cinematic);
+}
+.evidence-modal::backdrop{background:rgba(1,7,13,.9);backdrop-filter:blur(10px);opacity:0;transition:opacity .28s}
+.evidence-modal[open]{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(280px,.55fr)}
+.evidence-modal[open].is-presented{opacity:1;transform:none}
+.evidence-modal[open].is-presented::backdrop{opacity:1}
+.evidence-modal.is-closing{opacity:0;transform:translateY(12px) scale(.985)}
+.evidence-modal-media{min-height:70vh;background:#020910;display:grid;place-items:center;overflow:hidden}
+.evidence-modal-media img{width:100%;height:76vh;object-fit:contain}
+.evidence-modal-copy{padding:42px 34px;align-self:end}
+.evidence-modal-copy>span{color:var(--cyan);font:650 .58rem var(--font-head);letter-spacing:.15em;text-transform:uppercase}
+.evidence-modal-copy h3{margin:13px 0 12px;font-size:clamp(1.6rem,2.4vw,2.4rem)}
+.evidence-modal-copy p{color:#bed1db;line-height:1.7}
+.evidence-modal-copy small{display:block;margin-top:28px;padding-top:20px;border-top:1px solid var(--line);color:#7994a3;line-height:1.55}
+.evidence-modal-close{
+  position:absolute;z-index:4;right:16px;top:16px;width:44px;height:44px;
+  border:1px solid rgba(255,255,255,.2);border-radius:50%;
+  color:white;background:rgba(3,15,25,.74);backdrop-filter:blur(12px);
+  cursor:pointer;font-size:1.35rem;
+}
+.evidence-modal-close:hover{color:var(--gold);border-color:rgba(239,181,74,.6)}
+
+@media(max-width:980px){
+  .evidence-item,.evidence-wide,.evidence-landscape{grid-column:span 6;height:390px}
+  .evidence-intro{grid-template-columns:1fr 1fr}
+  .evidence-intro>p:last-child{grid-column:1/-1}
+}
+@media(max-width:680px){
+  .evidence-intro{display:block;padding:24px}
+  .evidence-intro h3{margin:18px 0 14px}
+  .evidence-item,.evidence-wide,.evidence-landscape,.evidence-item:nth-of-type(1),.evidence-item:nth-of-type(8){grid-column:1/-1;height:360px}
+  .evidence-modal[open]{grid-template-columns:1fr}
+  .evidence-modal-media{min-height:45vh}.evidence-modal-media img{height:50vh}
+  .evidence-modal-copy{padding:25px}
+}
+@media(prefers-reduced-motion:reduce){
+  .hero-ready .hero-name span,.quality-copy h2 span,.quality-copy h2 em{animation:none!important;background-position:50% 50%!important}
+  .evidence-modal,.evidence-modal::backdrop{transition:none}
+}
