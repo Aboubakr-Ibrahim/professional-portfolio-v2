@@ -602,6 +602,38 @@ body::after{display:none!important}
   .portrait-frame img{object-position:62% center}
 }
 
+/* V2 evidence directory: compact, role-led, and easier to scan. */
+.module-console{padding:96px max(4vw,32px) 82px;background:linear-gradient(180deg,#050e18 0%,#071421 60%,#06111d 100%)}
+.console-heading{grid-template-columns:.42fr 1.18fr .72fr;gap:32px;margin-bottom:34px}
+.console-heading h2{max-width:760px;font-size:clamp(2.35rem,3.65vw,4.25rem);line-height:.98;letter-spacing:-.048em}
+.console-heading p{max-width:390px;line-height:1.7}
+.module-grid{grid-template-columns:repeat(4,1fr);gap:11px}
+.module-card{min-height:208px;padding:22px;border-radius:17px}
+.module-card>i{margin:20px 0 18px;width:44px;height:44px;border-radius:13px}
+.module-card b{font-size:1.02rem}
+.module-card small{font-size:.72rem}
+.module-card em{padding-top:18px;font-size:.51rem}
+.module-collaboration{grid-column:auto}
+.module-utility{position:relative;z-index:1;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:var(--max);margin:12px auto 0}
+.module-utility a{display:flex;align-items:center;justify-content:space-between;gap:18px;min-height:56px;padding:13px 17px;border:1px solid rgba(141,197,219,.13);border-radius:12px;background:rgba(8,25,39,.56);color:#dcebf1;text-decoration:none;transition:transform .22s ease,border-color .22s ease,background .22s ease}
+.module-utility a:hover{transform:translateY(-3px);border-color:rgba(21,213,238,.42);background:rgba(10,35,52,.78)}
+.module-utility span{font:650 .68rem var(--font-head);letter-spacing:.03em}
+.module-utility small{color:#7794a4;font-size:.58rem;text-align:right}
+
+@media(max-width:1180px){
+  .console-heading{grid-template-columns:1fr 1.5fr}
+  .console-heading p{grid-column:2}
+  .module-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:760px){
+  .module-console{padding:76px 20px 62px}
+  .console-heading{grid-template-columns:1fr;gap:13px}
+  .console-heading p{grid-column:auto}
+  .module-grid{grid-template-columns:1fr}
+  .module-card{min-height:174px}
+  .module-utility{grid-template-columns:1fr}
+}
+
 /* v1.0.4 — FULL-BLEED PORTRAIT + REFINED AB IDENTITY */
 body::after{display:none!important;content:none!important}
 .site-header{background:linear-gradient(180deg,rgba(1,6,13,.9),rgba(1,6,13,.24));border-bottom-color:rgba(41,202,231,.12)}
