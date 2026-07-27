@@ -5,6 +5,12 @@ const commandPalette = document.querySelector('#command-palette');
 const commandTrigger = document.querySelector('.command-trigger');
 const commandClose = document.querySelector('.command-close');
 
+requestAnimationFrame(() => document.body.classList.add('hero-ready'));
+
+document.addEventListener('visibilitychange', () => {
+  document.body.classList.toggle('motion-paused', document.hidden);
+});
+
 const progress = document.createElement('div');
 progress.className = 'scroll-progress';
 progress.setAttribute('aria-hidden', 'true');
@@ -127,12 +133,31 @@ const animatedVisuals = document.querySelectorAll(
 
 if (!prefersReducedMotion && 'IntersectionObserver' in window) {
   const motionObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => entry.target.classList.toggle('motion-active', entry.isIntersecting));
+    entries.forEach(entry => {
+      const oneShot = entry.target.matches('.mini-wave, .poincare, .calibration-chart');
+      if (entry.isIntersecting) {
+        entry.target.classList.add('motion-active');
+        if (oneShot) motionObserver.unobserve(entry.target);
+      } else if (!oneShot) {
+        entry.target.classList.remove('motion-active');
+      }
+    });
   }, { threshold: 0.18, rootMargin: '60px 0px' });
   animatedVisuals.forEach(visual => motionObserver.observe(visual));
 } else {
   animatedVisuals.forEach(visual => visual.classList.add('motion-active'));
 }
+
+document.querySelectorAll('.project-card').forEach(card => {
+  card.addEventListener('pointerenter', () => {
+    if (prefersReducedMotion) return;
+    const replay = card.querySelector('.mini-wave, .poincare, .calibration-chart');
+    if (!replay) return;
+    replay.classList.remove('motion-active');
+    void replay.offsetWidth;
+    replay.classList.add('motion-active');
+  });
+});
 
 if (heroVisual && canAnimateDepth) {
   heroVisual.addEventListener('pointermove', event => {
