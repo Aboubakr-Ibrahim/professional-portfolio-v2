@@ -217,7 +217,7 @@ if (heroVisual && canAnimateDepth) {
   });
 }
 
-const motionTargets = document.querySelectorAll('.pillar, .project-card, .credential-card, .cv-primary, .cv-variants a, .evidence-item, .quality-list > div, .module-card');
+const motionTargets = document.querySelectorAll('.pillar, .project-card, .credential-card, .evidence-item, .quality-list > div, .module-card');
 motionTargets.forEach((target, index) => {
   target.classList.add('motion-card');
   if (target.classList.contains('reveal')) target.style.transitionDelay = `${Math.min(index % 4, 3) * 55}ms`;
