@@ -1936,3 +1936,162 @@ a,button,summary,[role="button"]{cursor:pointer}
 @media(prefers-reduced-motion:reduce){
   .hero-ready .hero-name span,.brand-mark-ab .ab-pulse-glow{animation:none!important}
 }
+
+/* V2.5 — continuous chromatic journey, scroll-safe evidence rooms and final type rhythm. */
+body.modal-open{overflow:hidden;overscroll-behavior:none}
+
+.hero-ready .hero-name span{
+  display:block!important;
+  width:max-content!important;
+  max-width:100%!important;
+  background-image:linear-gradient(
+    92deg,
+    #effcff 0%,
+    #40d9f1 14%,
+    #6ba6ff 30%,
+    #a479f4 46%,
+    #efb85d 62%,
+    #a479f4 77%,
+    #6ba6ff 89%,
+    #40d9f1 100%
+  )!important;
+  background-size:240% 100%!important;
+  background-position:0% 50%;
+  background-repeat:no-repeat!important;
+  -webkit-background-clip:text!important;
+  background-clip:text!important;
+  -webkit-text-fill-color:transparent!important;
+  color:transparent!important;
+  animation:hero-name-flow 9s cubic-bezier(.45,0,.2,1) infinite!important;
+  will-change:background-position,filter;
+}
+.hero-ready .hero-name span:last-child{
+  animation-delay:-4.5s!important;
+}
+@keyframes hero-name-flow{
+  0%,100%{
+    background-position:0% 50%;
+    filter:drop-shadow(0 0 10px rgba(64,217,241,.12));
+  }
+  50%{
+    background-position:100% 50%;
+    filter:drop-shadow(0 0 22px rgba(164,121,244,.22));
+  }
+}
+
+/* Each chapter keeps the same dark identity while the dominant hue evolves. */
+.about{
+  background:
+    radial-gradient(circle at 13% 18%,rgba(64,217,241,.13),transparent 34%),
+    radial-gradient(circle at 92% 82%,rgba(105,166,255,.08),transparent 36%),
+    linear-gradient(180deg,#071925 0%,#081827 100%)!important;
+}
+.experience{
+  background:
+    radial-gradient(circle at 86% 12%,rgba(41,146,255,.13),transparent 35%),
+    radial-gradient(circle at 9% 78%,rgba(64,217,241,.08),transparent 35%),
+    linear-gradient(180deg,#081827 0%,#09162a 100%)!important;
+}
+.projects{
+  background:
+    radial-gradient(circle at 88% 18%,rgba(164,121,244,.15),transparent 35%),
+    radial-gradient(circle at 10% 76%,rgba(82,139,255,.09),transparent 34%),
+    linear-gradient(180deg,#09162a 0%,#10142d 100%)!important;
+}
+.quality{
+  background:
+    radial-gradient(circle at 82% 20%,rgba(239,184,93,.15),transparent 34%),
+    radial-gradient(circle at 12% 78%,rgba(164,121,244,.09),transparent 35%),
+    linear-gradient(180deg,#10142d 0%,#151629 100%)!important;
+}
+.credentials{
+  background:
+    radial-gradient(circle at 14% 18%,rgba(239,184,93,.14),transparent 34%),
+    radial-gradient(circle at 90% 78%,rgba(68,225,184,.08),transparent 35%),
+    linear-gradient(180deg,#151629 0%,#101c27 100%)!important;
+}
+.skills{
+  background:
+    radial-gradient(circle at 84% 16%,rgba(68,225,184,.14),transparent 34%),
+    radial-gradient(circle at 12% 78%,rgba(64,217,241,.08),transparent 34%),
+    linear-gradient(180deg,#101c27 0%,#081d27 100%)!important;
+}
+.recommendation{
+  background:
+    radial-gradient(circle at 12% 20%,rgba(105,166,255,.13),transparent 35%),
+    radial-gradient(circle at 90% 75%,rgba(239,184,93,.08),transparent 34%),
+    linear-gradient(180deg,#081d27 0%,#0d182a 100%)!important;
+}
+.cv-center{
+  background:
+    radial-gradient(circle at 86% 18%,rgba(221,120,238,.13),transparent 34%),
+    radial-gradient(circle at 10% 80%,rgba(239,184,93,.08),transparent 35%),
+    linear-gradient(180deg,#0d182a 0%,#10172a 100%)!important;
+}
+.contact{
+  background:
+    radial-gradient(circle at 12% 20%,rgba(69,224,168,.14),transparent 34%),
+    radial-gradient(circle at 88% 76%,rgba(64,217,241,.08),transparent 35%),
+    linear-gradient(180deg,#10172a 0%,#071b24 100%)!important;
+}
+.module-console{
+  background:
+    radial-gradient(circle at 17% 15%,rgba(64,217,241,.09),transparent 33%),
+    radial-gradient(circle at 84% 80%,rgba(164,121,244,.08),transparent 34%),
+    linear-gradient(180deg,#06131f 0%,#071925 100%);
+}
+
+.bio-module:not(.hero){
+  border-top:1px solid rgba(var(--section-rgb),.08);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.012);
+}
+.bio-module:not(.hero)::before{
+  animation-duration:14s;
+  opacity:.9;
+}
+
+/* Editorial hierarchy: concise headings, readable measures and calmer wrapping. */
+.section-heading{max-width:1040px}
+.section-heading h2,.split-heading h2,.quality-copy h2{
+  text-wrap:balance;
+  font-kerning:normal;
+}
+.section-heading>p:last-child,.split-heading>p,.story-copy p,.quality-copy>p{
+  max-width:68ch;
+  text-wrap:pretty;
+  line-height:1.78;
+}
+.project-card p,.experience-card>p,.credential-copy p,.recommendation-card>p{
+  text-wrap:pretty;
+}
+.eyebrow,.hero-kicker,.project-top,.credential-copy>span{
+  letter-spacing:.15em;
+}
+
+.credential-modal{
+  width:min(1120px,94vw);
+  max-height:92vh;
+  border-radius:22px;
+  overflow:hidden;
+  box-shadow:0 38px 130px rgba(0,0,0,.72),0 0 70px rgba(164,121,244,.1);
+}
+.credential-modal img{height:min(78vh,860px)}
+.credential-modal::backdrop{
+  background:
+    radial-gradient(circle at 50% 42%,rgba(105,166,255,.11),transparent 38%),
+    rgba(1,7,13,.9);
+}
+
+@media(max-width:760px){
+  .hero-ready .hero-name span{background-size:280% 100%!important}
+  .credential-modal{width:94vw;max-height:90vh}
+  .credential-modal img{height:55vh}
+  .section-heading>p:last-child,.split-heading>p{line-height:1.7}
+}
+@media(prefers-reduced-motion:reduce){
+  .hero-ready .hero-name span{
+    animation:none!important;
+    background-position:50% 50%!important;
+  }
+  .bio-module:not(.hero)::before{animation:none!important}
+}
