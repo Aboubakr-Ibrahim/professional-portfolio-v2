@@ -1405,3 +1405,81 @@ details[open] summary::after{transform:rotate(45deg)}
   .credential-archive > :not(summary){animation:none!important}
   .credential-modal,.credential-modal::backdrop,.experience-card details,.credential-archive{transition:none!important}
 }
+
+/* V2.2 precision fixes — clear portrait, legible evidence, stable CV actions. */
+@media(min-width:1301px){
+  .hero-visual .card-signal{right:3.5%;top:13%}
+  .hero-visual .card-quality{right:4.5%;bottom:11%}
+}
+@media(max-width:1300px){
+  .hero-visual .floating-card{display:none!important}
+}
+
+.story-facts span{
+  background:linear-gradient(145deg,rgba(12,34,51,.92),rgba(7,23,36,.96));
+  border-color:rgba(118,202,225,.2);
+  color:#9db6c4;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.045),0 12px 28px rgba(0,0,0,.15);
+}
+.story-facts b{color:#edf8fc}
+.range-intro h3,.story-quote{color:#edf8fc}
+.range-grid b{color:#e8f5fa}
+.range-grid p{color:#9db5c2}
+
+.credential-archive .pathway-grid article{
+  background:linear-gradient(145deg,rgba(10,31,47,.96),rgba(7,23,36,.98));
+  border-color:rgba(113,195,218,.18);
+}
+.credential-archive .pathway-grid h3{color:#eaf6fa}
+.credential-archive .pathway-grid li{color:#9fb8c5}
+.credential-archive summary b{color:#eaf6fa}
+.credential-archive summary small{color:#6edce9}
+.credential-archive summary i{color:#dff7fb;border-color:rgba(110,220,233,.25)}
+
+.cv-primary,.cv-variants a{
+  transform:none!important;
+  will-change:auto!important;
+  transition:transform 280ms var(--ease-cinematic),border-color 280ms ease,box-shadow 280ms ease!important;
+}
+.cv-primary:hover,.cv-variants a:hover{
+  transform:translateY(-3px)!important;
+}
+.cv-primary:active,.cv-variants a:active{
+  transform:translateY(1px)!important;
+  transition-duration:100ms!important;
+}
+
+.education-sigil .diploma-icon{opacity:.82;overflow:visible}
+.education-sigil .diploma-sheet{
+  fill:rgba(10,31,47,.9);
+  transform-box:fill-box;
+  transform-origin:50% 100%;
+}
+.education-sigil .diploma-lines{stroke-dasharray:50;stroke-dashoffset:50}
+.education-sigil .diploma-roll{transform-box:fill-box;transform-origin:center}
+.education-sigil .diploma-ribbon{transform-box:fill-box;transform-origin:50% 0}
+.education-record.visible .diploma-paper{animation:diploma-unfurl 4.8s var(--ease-cinematic) infinite}
+.education-record.visible .diploma-lines{animation:diploma-write 4.8s var(--ease-signal) infinite}
+.education-record.visible .diploma-roll{animation:diploma-roll 4.8s var(--ease-cinematic) infinite}
+.education-record.visible .diploma-ribbon{animation:diploma-ribbon 2.4s ease-in-out infinite}
+
+@keyframes diploma-unfurl{
+  0%,12%{transform:translateY(19px) scaleY(.18);opacity:.3}
+  34%,78%{transform:none;opacity:1}
+  92%,100%{transform:translateY(19px) scaleY(.18);opacity:.3}
+}
+@keyframes diploma-write{
+  0%,28%{stroke-dashoffset:50;opacity:0}
+  50%,78%{stroke-dashoffset:0;opacity:1}
+  92%,100%{stroke-dashoffset:50;opacity:0}
+}
+@keyframes diploma-roll{
+  0%,12%,92%,100%{transform:translateY(-2px) rotate(-7deg)}
+  34%,78%{transform:translateY(5px) rotate(0)}
+}
+@keyframes diploma-ribbon{50%{transform:rotate(5deg) translateY(1px)}}
+
+@media(prefers-reduced-motion:reduce){
+  .education-record.visible .diploma-paper,.education-record.visible .diploma-lines,
+  .education-record.visible .diploma-roll,.education-record.visible .diploma-ribbon{animation:none!important}
+}
