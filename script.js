@@ -130,7 +130,9 @@ filterButtons.forEach(button => button.addEventListener('click', () => {
 const modal = document.querySelector('#credential-modal');
 const modalImage = document.querySelector('#modal-image');
 const modalTitle = document.querySelector('#modal-title');
+const modalCount = document.querySelector('.credential-modal-count');
 let modalInvoker = null;
+let credentialIndex = 0;
 
 const closeCredentialModal = () => {
   if (!modal?.open || modal.classList.contains('is-closing')) return;
@@ -147,16 +149,34 @@ const closeCredentialModal = () => {
   }, 240);
 };
 
-credentials.forEach(card => card.addEventListener('click', () => {
+const visibleCredentials = () => [...credentials].filter(card => !card.hidden);
+const presentCredential = index => {
+  const available = visibleCredentials();
+  if (!available.length) return;
+  credentialIndex = (index + available.length) % available.length;
+  const card = available[credentialIndex];
   modalInvoker = card;
-  modalImage.src = card.dataset.image;
-  modalImage.alt = card.dataset.title;
-  modalTitle.textContent = card.dataset.title;
+  modalImage.classList.add('is-changing');
+  window.setTimeout(() => {
+    modalImage.src = card.dataset.image;
+    modalImage.alt = card.dataset.title;
+    modalTitle.textContent = card.dataset.title;
+    modalCount.textContent = `${String(credentialIndex + 1).padStart(2, '0')} / ${String(available.length).padStart(2, '0')}`;
+    modalImage.classList.remove('is-changing');
+  }, modal?.open ? 140 : 0);
+};
+
+credentials.forEach(card => card.addEventListener('click', () => {
+  const available = visibleCredentials();
+  const index = available.indexOf(card);
+  presentCredential(index < 0 ? 0 : index);
   modal.showModal();
   requestAnimationFrame(() => modal.classList.add('is-presented'));
 }));
 
 document.querySelector('.modal-close')?.addEventListener('click', closeCredentialModal);
+document.querySelector('.credential-modal-prev')?.addEventListener('click', () => presentCredential(credentialIndex - 1));
+document.querySelector('.credential-modal-next')?.addEventListener('click', () => presentCredential(credentialIndex + 1));
 modal.addEventListener('click', event => {
   const bounds = modal.getBoundingClientRect();
   const outside = event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom;
@@ -165,6 +185,10 @@ modal.addEventListener('click', event => {
 modal.addEventListener('cancel', event => {
   event.preventDefault();
   closeCredentialModal();
+});
+modal.addEventListener('keydown', event => {
+  if (event.key === 'ArrowLeft') presentCredential(credentialIndex - 1);
+  if (event.key === 'ArrowRight') presentCredential(credentialIndex + 1);
 });
 modal.addEventListener('close', () => modal.classList.remove('is-presented', 'is-closing'));
 
@@ -261,6 +285,15 @@ const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)
 const animatedVisuals = document.querySelectorAll(
   '.monitor-ui, .sepsis-visual, .mini-wave, .poincare, .spectrogram, .calibration-chart, .quality-seal, .brand-mark-ab'
 );
+
+document.querySelectorAll('.brand-mark-ab .ab-pulse').forEach(pulse => {
+  if (pulse.parentElement?.querySelector('.ab-pulse-glow')) return;
+  const glow = pulse.cloneNode();
+  glow.removeAttribute('class');
+  glow.classList.add('ab-pulse-glow');
+  glow.setAttribute('aria-hidden', 'true');
+  pulse.after(glow);
+});
 
 if (!prefersReducedMotion && 'IntersectionObserver' in window) {
   const motionObserver = new IntersectionObserver(entries => {
