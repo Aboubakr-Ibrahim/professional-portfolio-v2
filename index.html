@@ -630,8 +630,10 @@
 
   <dialog class="credential-modal" id="credential-modal" aria-labelledby="modal-title">
     <button class="modal-close" aria-label="Close certificate preview">×</button>
+    <button class="credential-modal-nav credential-modal-prev" aria-label="View previous certificate">‹</button>
+    <button class="credential-modal-nav credential-modal-next" aria-label="View next certificate">›</button>
     <img id="modal-image" src="" alt="">
-    <div><span>Selected credential</span><h3 id="modal-title"></h3><p>Displayed as issued. Click outside the panel or press Escape to close.</p></div>
+    <div><span>Selected credential</span><h3 id="modal-title"></h3><div class="credential-modal-count" aria-live="polite"></div><p>Displayed as issued. Use the arrows to explore the collection, click outside the panel, or press Escape to close.</p></div>
   </dialog>
 
   <dialog class="evidence-modal" id="evidence-modal" aria-labelledby="evidence-modal-title">
