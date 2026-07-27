@@ -1751,3 +1751,105 @@ body{
   .hero-ready .hero-name span,.quality-copy h2 span,.quality-copy h2 em{animation:none!important;background-position:50% 50%!important}
   .evidence-modal,.evidence-modal::backdrop{transition:none}
 }
+
+/* V2.3 — browser-safe identity, independent experience cards and clearer actions. */
+.hero-ready .hero-name span{
+  display:block!important;
+  width:max-content!important;
+  max-width:100%;
+  background:linear-gradient(98deg,#effcff 0%,#40d9f1 23%,#6ba6ff 48%,#a479f4 70%,#efb85d 100%)!important;
+  background-size:100% 100%!important;
+  background-repeat:no-repeat!important;
+  -webkit-background-clip:text!important;
+  background-clip:text!important;
+  -webkit-text-fill-color:transparent!important;
+  color:transparent!important;
+  animation:hero-name-color-safe 7.5s ease-in-out infinite!important;
+}
+.hero-ready .hero-name span:last-child{animation-delay:-3.75s!important}
+@keyframes hero-name-color-safe{
+  0%,100%{filter:hue-rotate(0deg) saturate(1) drop-shadow(0 0 10px rgba(64,217,241,.12))}
+  50%{filter:hue-rotate(14deg) saturate(1.12) drop-shadow(0 0 20px rgba(164,121,244,.22))}
+}
+
+.experience-grid{align-items:start}
+.experience-card{align-self:start}
+.experience-card details{height:auto!important;overflow:visible!important}
+.experience-card details>ul{animation:experience-details-in .32s var(--ease-cinematic) both}
+@keyframes experience-details-in{from{opacity:0;transform:translateY(-7px)}to{opacity:1;transform:none}}
+
+.evidence-modal-nav{
+  position:absolute;z-index:5;top:50%;width:52px;height:66px;
+  display:grid;place-items:center;transform:translateY(-50%);
+  border:1px solid rgba(255,255,255,.2);border-radius:14px;
+  color:#effcff;background:rgba(3,15,25,.72);backdrop-filter:blur(12px);
+  font:300 2.3rem/1 var(--font-head);cursor:pointer;
+  transition:transform .22s var(--ease-cinematic),color .22s,border-color .22s,background .22s;
+}
+.evidence-modal-prev{left:16px}.evidence-modal-next{right:16px}
+.evidence-modal-nav:hover{color:var(--gold);border-color:rgba(239,181,74,.62);background:rgba(19,27,39,.88)}
+.evidence-modal-prev:hover{transform:translate(-3px,-50%)}.evidence-modal-next:hover{transform:translate(3px,-50%)}
+.evidence-modal-media img{opacity:1;transform:scale(1);transition:opacity .18s ease,transform .35s var(--ease-cinematic)}
+.evidence-modal-media img.is-changing{opacity:.12;transform:scale(.985)}
+.evidence-modal-count{margin-top:20px;color:var(--gold);font:650 .62rem var(--font-head);letter-spacing:.15em}
+
+.contact-facts>div{
+  position:relative;
+  display:grid;
+  grid-template-columns:46px 1fr;
+  column-gap:16px;
+  padding:22px 0;
+}
+.contact-facts>div .contact-icon{
+  grid-row:1/4;display:grid;place-items:center;
+  width:42px;height:42px;border:1px solid rgba(79,213,236,.28);border-radius:12px;
+  color:var(--cyan);background:linear-gradient(145deg,rgba(21,213,238,.09),rgba(155,123,255,.06));
+  font-style:normal;font-size:1rem;
+  box-shadow:inset 0 0 16px rgba(21,213,238,.04);
+}
+.contact-facts>div>span,.contact-facts>div>b,.contact-facts>div>small{grid-column:2}
+.contact-facts>div>span{align-self:end}.contact-facts>div>b{margin-top:5px}
+.contact-facts>div>small{display:block;margin-top:5px;color:#8ca8b6;font-size:.72rem;line-height:1.45}
+.language-fact .contact-icon{color:var(--gold)!important;border-color:rgba(239,181,74,.32)!important}
+
+a,button,summary,[role="button"]{cursor:pointer}
+.button,.text-link,.project-card>a,.cv-download,.recommender-links a,.contact-actions a,.filter-button{
+  -webkit-tap-highlight-color:transparent;
+}
+.button:focus-visible,.text-link:focus-visible,.project-card>a:focus-visible,.recommender-links a:focus-visible,
+.contact-actions a:focus-visible,.filter-button:focus-visible,.evidence-modal-nav:focus-visible,.evidence-modal-close:focus-visible{
+  outline:2px solid var(--gold);outline-offset:4px;
+}
+.button:active,.text-link:active,.project-card>a:active,.recommender-links a:active,.filter-button:active,
+.evidence-modal-nav:active,.evidence-modal-close:active{
+  transform:translateY(1px) scale(.965)!important;
+  filter:brightness(1.18);
+}
+
+/* One calm, continuous logo trace instead of repeated abrupt redraws. */
+.motion-active.brand-mark-ab .ab-pulse,.hero-ready .hero-identity-lockup .ab-pulse{
+  stroke-dasharray:34 146!important;
+  stroke-dashoffset:180;
+  opacity:1;
+  animation:logo-signal-smooth 8.5s linear infinite!important;
+}
+.motion-active.brand-mark-ab .ab-outline,.hero-ready .hero-identity-lockup .ab-outline{
+  animation:logo-metal-breathe 8.5s ease-in-out infinite!important;
+}
+.motion-active.brand-mark-ab .ab-plus,.hero-ready .hero-identity-lockup .ab-plus{
+  animation:logo-plus-smooth 8.5s ease-in-out infinite!important;
+}
+@keyframes logo-signal-smooth{to{stroke-dashoffset:-180}}
+@keyframes logo-metal-breathe{0%,100%{opacity:.86;filter:none}50%{opacity:1;filter:drop-shadow(0 0 4px rgba(167,221,239,.24))}}
+@keyframes logo-plus-smooth{0%,70%,100%{transform:scale(1);opacity:.78}82%{transform:scale(1.16);opacity:1;filter:drop-shadow(0 0 7px #21e0ef)}}
+
+@media(max-width:680px){
+  .evidence-modal-nav{top:auto;bottom:16px;transform:none;width:48px;height:48px}
+  .evidence-modal-prev{left:16px}.evidence-modal-next{right:16px}
+  .evidence-modal-prev:hover,.evidence-modal-next:hover{transform:none}
+  .contact-facts>div{grid-template-columns:42px 1fr;column-gap:13px}
+}
+@media(prefers-reduced-motion:reduce){
+  .hero-ready .hero-name span,.motion-active.brand-mark-ab .ab-pulse,.motion-active.brand-mark-ab .ab-outline,
+  .motion-active.brand-mark-ab .ab-plus{animation:none!important}
+}
