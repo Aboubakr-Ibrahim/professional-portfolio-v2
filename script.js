@@ -35,6 +35,14 @@ nav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
   document.body.classList.remove('menu-open');
 }));
 
+document.querySelectorAll('a[href="#top"]').forEach(link => {
+  link.addEventListener('click', event => {
+    event.preventDefault();
+    window.scrollTo({ top: 0, left: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+    history.replaceState(null, '', `${location.pathname}${location.search}#top`);
+  });
+});
+
 const openCommandPalette = () => {
   if (!commandPalette || commandPalette.open) return;
   commandPalette.showModal();
