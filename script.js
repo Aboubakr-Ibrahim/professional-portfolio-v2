@@ -135,17 +135,21 @@ let modalInvoker = null;
 let credentialIndex = 0;
 let modalScrollPosition = 0;
 let modalScrollLocked = false;
+let modalScrollbarGap = 0;
 
 const lockPageForModal = () => {
   if (modalScrollLocked) return;
   modalScrollPosition = window.scrollY;
+  modalScrollbarGap = Math.max(0, window.innerWidth - document.documentElement.clientWidth);
   modalScrollLocked = true;
+  document.documentElement.classList.add('modal-scroll-locked');
   document.body.classList.add('modal-open');
   document.body.style.position = 'fixed';
   document.body.style.top = `-${modalScrollPosition}px`;
   document.body.style.left = '0';
   document.body.style.right = '0';
   document.body.style.width = '100%';
+  if (modalScrollbarGap) document.body.style.paddingRight = `${modalScrollbarGap}px`;
 };
 
 const unlockPageAfterModal = invoker => {
@@ -153,29 +157,33 @@ const unlockPageAfterModal = invoker => {
     invoker?.focus({ preventScroll: true });
     return;
   }
+  const restorePosition = modalScrollPosition;
   document.body.classList.remove('modal-open');
   document.body.style.position = '';
   document.body.style.top = '';
   document.body.style.left = '';
   document.body.style.right = '';
   document.body.style.width = '';
-  window.scrollTo({ top: modalScrollPosition, left: 0, behavior: 'auto' });
+  document.body.style.paddingRight = '';
+  document.documentElement.classList.remove('modal-scroll-locked');
   modalScrollLocked = false;
-  requestAnimationFrame(() => invoker?.focus({ preventScroll: true }));
+  window.scrollTo(0, restorePosition);
+  requestAnimationFrame(() => {
+    window.scrollTo(0, restorePosition);
+    invoker?.focus({ preventScroll: true });
+  });
 };
 
 const closeCredentialModal = () => {
   if (!modal?.open || modal.classList.contains('is-closing')) return;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     modal.close();
-    unlockPageAfterModal(modalInvoker);
     return;
   }
   modal.classList.add('is-closing');
   window.setTimeout(() => {
     modal.close();
     modal.classList.remove('is-closing', 'is-presented');
-    unlockPageAfterModal(modalInvoker);
   }, 240);
 };
 
@@ -221,7 +229,10 @@ modal.addEventListener('keydown', event => {
   if (event.key === 'ArrowLeft') presentCredential(credentialIndex - 1);
   if (event.key === 'ArrowRight') presentCredential(credentialIndex + 1);
 });
-modal.addEventListener('close', () => modal.classList.remove('is-presented', 'is-closing'));
+modal.addEventListener('close', () => {
+  modal.classList.remove('is-presented', 'is-closing');
+  unlockPageAfterModal(modalInvoker);
+});
 
 const evidenceModal = document.querySelector('#evidence-modal');
 const evidenceModalImage = document.querySelector('#evidence-modal-image');
@@ -236,14 +247,12 @@ const closeEvidenceModal = () => {
   if (!evidenceModal?.open || evidenceModal.classList.contains('is-closing')) return;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     evidenceModal.close();
-    unlockPageAfterModal(evidenceInvoker);
     return;
   }
   evidenceModal.classList.add('is-closing');
   window.setTimeout(() => {
     evidenceModal.close();
     evidenceModal.classList.remove('is-closing', 'is-presented');
-    unlockPageAfterModal(evidenceInvoker);
   }, 260);
 };
 
@@ -306,7 +315,10 @@ evidenceModal?.addEventListener('keydown', event => {
   if (event.key === 'ArrowLeft') presentEvidence(evidenceIndex - 1);
   if (event.key === 'ArrowRight') presentEvidence(evidenceIndex + 1);
 });
-evidenceModal?.addEventListener('close', () => evidenceModal.classList.remove('is-presented', 'is-closing'));
+evidenceModal?.addEventListener('close', () => {
+  evidenceModal.classList.remove('is-presented', 'is-closing');
+  unlockPageAfterModal(evidenceInvoker);
+});
 
 document.querySelector('#year').textContent = new Date().getFullYear();
 
@@ -374,7 +386,9 @@ if (heroVisual && canAnimateDepth) {
   });
 }
 
-const motionTargets = document.querySelectorAll('.pillar, .project-card, .credential-card, .evidence-item, .quality-list > div, .module-card');
+// Reserve pointer depth for the few cards where it adds meaning. Credential,
+// evidence and CV controls stay geometrically stable so clicking always feels precise.
+const motionTargets = document.querySelectorAll('.pillar, .project-card, .quality-list > div, .module-card');
 motionTargets.forEach((target, index) => {
   target.classList.add('motion-card');
   if (target.classList.contains('reveal')) target.style.transitionDelay = `${Math.min(index % 4, 3) * 55}ms`;
@@ -385,8 +399,6 @@ motionTargets.forEach((target, index) => {
   target.addEventListener('pointercancel', release);
   target.addEventListener('pointerleave', release);
 });
-
-document.querySelectorAll('.button').forEach(button => button.classList.add('magnetic'));
 
 document.querySelectorAll('.credential-archive').forEach(details => {
   const summary = details.querySelector(':scope > summary');
@@ -437,17 +449,6 @@ if (canAnimateDepth) {
     });
   });
 
-  document.querySelectorAll('.magnetic').forEach(button => {
-    button.addEventListener('pointermove', event => {
-      const bounds = button.getBoundingClientRect();
-      button.style.setProperty('--mag-x', `${(event.clientX - bounds.left - bounds.width / 2) * 0.08}px`);
-      button.style.setProperty('--mag-y', `${(event.clientY - bounds.top - bounds.height / 2) * 0.08}px`);
-    });
-    button.addEventListener('pointerleave', () => {
-      button.style.setProperty('--mag-x', '0px');
-      button.style.setProperty('--mag-y', '0px');
-    });
-  });
 }
 
 document.querySelectorAll('main > .section').forEach((section, index, sections) => {
