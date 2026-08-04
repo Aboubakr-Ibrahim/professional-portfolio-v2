@@ -33,7 +33,7 @@ a,button,summary{touch-action:manipulation}
   color:transparent!important;
   -webkit-background-clip:text!important;
   background-clip:text!important;
-  animation:release-name-spectrum 4.8s linear infinite!important;
+  animation:release-name-spectrum 4.2s ease-in-out infinite!important;
   filter:drop-shadow(0 0 17px rgba(76,177,255,.2))!important;
   will-change:background-position;
 }
@@ -58,9 +58,10 @@ a,button,summary{touch-action:manipulation}
 }
 .brand-mark-ab .ab-letter-scan{display:none!important}
 .brand-mark-ab .ab-pulse{
+  stroke-width:4.2!important;
   stroke-dasharray:none!important;
   stroke-dashoffset:0!important;
-  opacity:.92!important;
+  opacity:1!important;
   animation:release-logo-heartbeat 2.8s ease-in-out infinite!important;
   filter:drop-shadow(0 0 5px rgba(24,224,239,.72))!important;
 }
