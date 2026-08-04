@@ -33,14 +33,15 @@ a,button,summary{touch-action:manipulation}
   color:transparent!important;
   -webkit-background-clip:text!important;
   background-clip:text!important;
-  animation:release-name-spectrum 5.8s linear infinite!important;
+  animation:release-name-spectrum 4.8s linear infinite!important;
   filter:drop-shadow(0 0 17px rgba(76,177,255,.2))!important;
   will-change:background-position;
 }
 .hero-name span:last-child,.hero-ready .hero-name span:last-child{animation-delay:-4.2s!important}
 @keyframes release-name-spectrum{
-  from{background-position:0% 50%}
-  to{background-position:100% 50%}
+  0%{background-position:0% 50%;filter:drop-shadow(0 0 14px rgba(36,215,233,.18)) hue-rotate(0deg)}
+  50%{background-position:100% 50%;filter:drop-shadow(0 0 19px rgba(164,124,255,.22)) hue-rotate(22deg)}
+  100%{background-position:0% 50%;filter:drop-shadow(0 0 14px rgba(36,215,233,.18)) hue-rotate(0deg)}
 }
 
 /* Living AB identity: metallic breath, ECG trace and a restrained medical flare. */
@@ -55,31 +56,22 @@ a,button,summary{touch-action:manipulation}
   stroke-dashoffset:0;
   animation:release-logo-metal 7.2s ease-in-out infinite!important;
 }
-.brand-mark-ab .ab-letter-scan{
-  fill:none;
-  stroke:#29deee;
-  stroke-width:4.4;
-  stroke-linecap:round;
-  stroke-linejoin:round;
-  stroke-dasharray:24 142;
-  stroke-dashoffset:166;
-  opacity:1;
-  animation:release-logo-a-trace 3.7s cubic-bezier(.42,0,.2,1) infinite!important;
-  filter:drop-shadow(0 0 7px rgba(36,222,238,.95));
-}
+.brand-mark-ab .ab-letter-scan{display:none!important}
 .brand-mark-ab .ab-pulse{
-  stroke-dasharray:28 162!important;
-  stroke-dashoffset:190!important;
-  opacity:1!important;
-  animation:release-logo-ecg 3.7s cubic-bezier(.42,0,.2,1) infinite!important;
-  filter:drop-shadow(0 0 7px rgba(24,224,239,.9))!important;
+  stroke-dasharray:none!important;
+  stroke-dashoffset:0!important;
+  opacity:.92!important;
+  animation:release-logo-heartbeat 2.8s ease-in-out infinite!important;
+  filter:drop-shadow(0 0 5px rgba(24,224,239,.72))!important;
 }
 .brand-mark-ab .ab-pulse-glow{
-  stroke-dasharray:18 172!important;
+  stroke:#f4fdff!important;
+  stroke-width:5.2!important;
+  stroke-dasharray:24 166!important;
   stroke-dashoffset:190!important;
-  opacity:.68!important;
-  animation:release-logo-glow 3.7s cubic-bezier(.42,0,.2,1) infinite!important;
-  filter:blur(2.5px) drop-shadow(0 0 9px #20dfee)!important;
+  opacity:0!important;
+  animation:release-logo-signal-travel 2.8s linear infinite!important;
+  filter:blur(.35px) drop-shadow(0 0 8px #20dfee) drop-shadow(0 0 14px #20dfee)!important;
 }
 .brand-mark-ab .ab-plus{
   transform-box:fill-box;
@@ -102,23 +94,14 @@ a,button,summary{touch-action:manipulation}
   0%,100%{stroke-dashoffset:0;opacity:.82}
   48%{stroke-dashoffset:-38;opacity:1}
 }
-@keyframes release-logo-ecg{
-  0%{stroke-dashoffset:190;opacity:.2}
-  16%{opacity:1}
-  72%{stroke-dashoffset:0;opacity:1}
-  100%{stroke-dashoffset:-190;opacity:.18}
+@keyframes release-logo-heartbeat{
+  0%,100%{opacity:.72;filter:drop-shadow(0 0 4px rgba(24,224,239,.55))}
+  46%{opacity:1;filter:drop-shadow(0 0 8px rgba(24,224,239,.95))}
 }
-@keyframes release-logo-a-trace{
-  0%{stroke-dashoffset:166;opacity:0}
-  9%{opacity:1}
-  63%{stroke-dashoffset:0;opacity:1}
-  82%{stroke-dashoffset:-70;opacity:.72}
-  100%{stroke-dashoffset:-166;opacity:0}
-}
-@keyframes release-logo-glow{
+@keyframes release-logo-signal-travel{
   0%{stroke-dashoffset:190;opacity:0}
-  18%{opacity:.72}
-  72%{stroke-dashoffset:0;opacity:.72}
+  8%{opacity:1}
+  88%{opacity:1}
   100%{stroke-dashoffset:-190;opacity:0}
 }
 @keyframes release-logo-plus{
@@ -224,5 +207,7 @@ a,button,summary{touch-action:manipulation}
 }
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
-  .hero-name span,.brand-name b,.hero-identity-lockup b{background-position:48% 50%!important}
+  /* The requested identity color cycle is non-spatial and remains active. */
+  .hero-name span,.hero-ready .hero-name span{animation:release-name-spectrum 9s linear infinite!important}
+  .brand-name b,.hero-identity-lockup b{background-position:48% 50%!important}
 }
