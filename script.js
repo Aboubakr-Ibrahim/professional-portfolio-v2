@@ -5,6 +5,25 @@ const commandPalette = document.querySelector('#command-palette');
 const commandTrigger = document.querySelector('.command-trigger');
 const commandClose = document.querySelector('.command-close');
 
+// Keep the most important visual resilient. If a deployment serves an older
+// asset set or a browser cannot decode the preferred source, the portrait
+// falls back without leaving the first viewport empty.
+const heroPortrait = document.querySelector('#hero-portrait');
+if (heroPortrait) {
+  const markHeroImageReady = () => document.body.classList.add('hero-image-ready');
+  if (heroPortrait.complete && heroPortrait.naturalWidth > 0) markHeroImageReady();
+  heroPortrait.addEventListener('load', markHeroImageReady, { once: true });
+  heroPortrait.addEventListener('error', () => {
+    const fallback = heroPortrait.dataset.fallback;
+    if (fallback && heroPortrait.getAttribute('src') !== fallback) {
+      heroPortrait.closest('picture')?.querySelector('source')?.remove();
+      heroPortrait.setAttribute('src', fallback);
+    } else {
+      document.body.classList.add('hero-image-failed');
+    }
+  });
+}
+
 requestAnimationFrame(() => document.body.classList.add('hero-ready'));
 
 document.addEventListener('visibilitychange', () => {

@@ -1,0 +1,127 @@
+/* Aboubakr Biomedical — final release layer
+   One authoritative visual contract placed after the preserved legacy system. */
+:root{
+  --release-cyan:#24d7e9;--release-blue:#64a6ff;--release-violet:#a47cff;
+  --release-gold:#f2b94b;--release-green:#42dfbd;--release-ink:#030a12;
+  --release-panel:rgba(8,27,42,.82);--release-border:rgba(136,199,222,.18);
+  --release-text:#edf8fc;--release-muted:#a9bfca;
+  --release-shadow:0 24px 80px rgba(0,0,0,.28);
+  --release-radius:26px;--release-space:clamp(88px,9vw,148px);
+}
+html{scroll-padding-top:92px}
+body{color:var(--release-text);background:#030a12}
+main{overflow:clip}
+a,button,summary{touch-action:manipulation}
+:focus-visible{outline:2px solid var(--release-cyan)!important;outline-offset:4px!important}
+.section,.module-console{position:relative;isolation:isolate}
+.section{padding-top:var(--release-space);padding-bottom:var(--release-space);scroll-margin-top:86px}
+.section-heading{max-width:1180px;margin-left:auto;margin-right:auto}
+.section-heading h2{max-width:930px;text-wrap:balance;line-height:1.02;letter-spacing:-.045em}
+.section-heading p,.split-heading>p{max-width:680px;color:var(--release-muted);line-height:1.75}
+.section-kicker{font-weight:700;letter-spacing:.17em}
+.bio-module::after{opacity:.72}
+
+/* Stable cinematic hero */
+.hero{min-height:clamp(780px,100svh,980px)!important}
+.hero-content{padding-top:clamp(12px,3vh,40px)!important}
+.hero-identity-lockup{margin-bottom:28px}
+.hero-name{margin:.25rem 0 1.25rem!important;text-wrap:balance}
+.hero-hook{line-height:1.12!important;text-wrap:balance}
+.hero-lead{color:#b9cbd3!important}
+.hero-actions .button{min-height:54px;border-radius:14px}
+.hero-proof-mini a{background:linear-gradient(145deg,rgba(13,38,56,.76),rgba(5,19,31,.88));backdrop-filter:blur(16px)}
+.hero-proof-mini a:hover{transform:translateY(-5px);box-shadow:0 18px 50px rgba(0,0,0,.28)}
+.availability{color:#b9cbd3}
+
+/* Evidence directory */
+.module-console{padding-top:clamp(86px,8vw,126px);padding-bottom:clamp(78px,8vw,118px)}
+.console-heading h2{text-wrap:balance}
+.module-card{border-radius:var(--release-radius);box-shadow:inset 0 1px rgba(255,255,255,.035)}
+.module-card .module-icon{transition:transform .45s cubic-bezier(.2,.8,.2,1),box-shadow .45s}
+.module-card:hover .module-icon{transform:translateY(-4px) scale(1.06);box-shadow:0 0 28px color-mix(in srgb,var(--module-color) 22%,transparent)}
+.module-card b{color:var(--release-text)}
+
+/* Every chapter keeps its own identity */
+#about{--chapter:#24d7e9}#experience{--chapter:#41d9c0}#projects{--chapter:#a47cff}
+#quality{--chapter:#f2b94b}#credentials{--chapter:#e4ac4a}#skills{--chapter:#64a6ff}
+#languages{--chapter:#42dfbd}#recommendation{--chapter:#b28cff}#cv-center{--chapter:#f2b94b}#contact{--chapter:#35d6c1}
+.section::after{content:"";position:absolute;z-index:-1;width:34vw;height:34vw;right:-14vw;top:7%;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--chapter) 8%,transparent),transparent 68%);pointer-events:none}
+
+/* Profile / story */
+.range-intro{align-items:start}.range-intro h3{max-width:980px;text-wrap:balance}
+.pillars{gap:16px}.pillar{border-radius:var(--release-radius);background:linear-gradient(145deg,rgba(10,34,50,.88),rgba(5,20,32,.94));border-color:color-mix(in srgb,var(--pillar-color,var(--chapter)) 34%,transparent)}
+.pillar h3{color:var(--release-text)}.pillar p,.pillar li{color:var(--release-muted)}
+.story-quote{border-radius:var(--release-radius)}
+.education-record{border-radius:var(--release-radius);box-shadow:var(--release-shadow)}
+
+/* Experience */
+.experience-card{border-radius:var(--release-radius);overflow:hidden;box-shadow:var(--release-shadow)}
+.experience-card h3{color:var(--release-text)}
+.experience-card p,.experience-card li{color:var(--release-muted)}
+.evidence-grid{gap:12px}.evidence-item{border-radius:18px;overflow:hidden}
+.evidence-item::after{content:"View evidence";position:absolute;left:14px;bottom:12px;padding:7px 10px;border-radius:999px;background:rgba(3,10,18,.72);color:#eaf8fc;font:600 .55rem var(--font-mono);letter-spacing:.08em;opacity:0;transform:translateY(7px);transition:.3s}
+.evidence-item:hover::after,.evidence-item:focus-visible::after{opacity:1;transform:none}
+
+/* Projects */
+.sepsis-feature,.project-card{border-radius:var(--release-radius);box-shadow:var(--release-shadow)}
+.project-grid{gap:16px}.project-card{overflow:hidden}
+.project-card p{color:var(--release-muted)}
+.project-card:hover{transform:translateY(-7px)!important}
+
+/* Quality and credentials */
+.quality-copy h2{text-wrap:balance}.quality-list>div{border-radius:18px}
+.credential-grid{gap:14px}.credential-card{border-radius:20px;overflow:hidden;box-shadow:0 14px 42px rgba(0,0,0,.14)}
+.credential-card img{transition:transform .65s cubic-bezier(.2,.8,.2,1),filter .4s}
+.credential-card:hover img{transform:scale(1.035);filter:saturate(1.05) contrast(1.02)}
+.credential-card h3{line-height:1.25}.credential-archive{border-radius:var(--release-radius)}
+
+/* Capability map and languages */
+.skill-matrix{gap:1px;border-radius:var(--release-radius);overflow:hidden;background:var(--release-border)}
+.skill-group{background:linear-gradient(145deg,#092133,#071827)!important}
+.skill-group h3{color:var(--release-text)}.skill-context{color:var(--release-muted)}
+.skill-group span{transition:transform .22s,border-color .22s,background .22s}
+.skill-group span:hover{transform:translateY(-2px);background:rgba(255,255,255,.055)}
+.language-card{border-radius:var(--release-radius);box-shadow:var(--release-shadow)}
+
+/* Recommendations, CV and contact */
+.recommendation .section-heading{text-align:left!important}
+.recommendation .section-heading h2,.recommendation .section-heading p{margin-left:0!important;margin-right:0!important}
+.recommendation-grid{gap:16px}.recommendation-card{border-radius:var(--release-radius);box-shadow:var(--release-shadow)}
+.recommendation-card blockquote{text-wrap:balance}
+.cv-primary,.cv-on-request{border-radius:var(--release-radius);box-shadow:var(--release-shadow)}
+.cv-primary .cv-download{display:inline-flex;align-items:center;gap:9px;padding:11px 15px;border:1px solid rgba(242,185,75,.45);border-radius:999px;background:rgba(242,185,75,.09);color:#ffd373}
+.cv-primary:hover .cv-download{background:var(--release-gold);color:#07111b;box-shadow:0 0 28px rgba(242,185,75,.24)}
+.contact-panel{border-radius:30px;box-shadow:var(--release-shadow)}
+.contact-panel h2{text-wrap:balance}.contact-panel p{color:var(--release-muted)}
+.contact-fact{transition:transform .35s cubic-bezier(.2,.8,.2,1),border-color .35s,background .35s}
+.contact-fact:hover{transform:translateY(-6px);border-color:rgba(36,215,233,.38);background:rgba(36,215,233,.055)}
+
+/* Responsive hierarchy */
+@media(max-width:1050px){
+  .section-heading{max-width:none}.hero{min-height:auto!important}
+  .hero-content{width:min(720px,72vw)!important}.hero-proof-mini{max-width:680px}
+}
+@media(max-width:760px){
+  :root{--release-space:78px;--release-radius:20px}
+  html{scroll-padding-top:76px}.section{scroll-margin-top:72px}
+  .hero{padding-bottom:44px!important}.hero-content{width:100%!important}
+  .hero-name{font-size:clamp(3.15rem,15.6vw,4.65rem)!important;line-height:.9!important}
+  .hero-hook{font-size:clamp(1.55rem,7vw,2.25rem)!important}
+  .hero-proof-mini{grid-template-columns:1fr!important}.hero-proof-mini a{min-height:92px}
+  .module-grid,.pillars,.project-grid,.language-grid,.recommendation-grid,.cv-system{grid-template-columns:1fr!important}
+  .evidence-grid{grid-template-columns:repeat(2,1fr)}
+  .credential-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .skill-matrix{grid-template-columns:1fr!important}
+  .contact-panel{padding:30px 22px!important}
+}
+@media(max-width:470px){
+  .credential-grid,.evidence-grid{grid-template-columns:1fr}
+  .hero-name{font-size:clamp(3rem,15vw,4rem)!important}
+}
+@media(hover:none){
+  .motion-card:hover,.project-card:hover,.module-card:hover,.contact-fact:hover{transform:none!important}
+  .evidence-item::after{opacity:1;transform:none}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}

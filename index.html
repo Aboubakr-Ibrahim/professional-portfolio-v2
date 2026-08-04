@@ -17,11 +17,13 @@
   <meta name="twitter:image" content="https://professional-portfolio-v2-git-redesign-v2-aboubakr-portfolio.vercel.app/assets/images/aboubakr-hero-v4.webp">
   <link rel="canonical" href="https://professional-portfolio-v2-git-redesign-v2-aboubakr-portfolio.vercel.app/">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preload" as="image" href="assets/images/aboubakr-hero-v4.webp" type="image/webp" fetchpriority="high">
   <title>Aboubakr Ibrahim | Biomedical Engineer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="release.css">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -31,7 +33,7 @@
       "name": "Aboubakr Ibrahim",
       "jobTitle": "Biomedical Engineer",
       "url": "https://professional-portfolio-v2-git-redesign-v2-aboubakr-portfolio.vercel.app/",
-      "image": "https://professional-portfolio-v2-git-redesign-v2-aboubakr-portfolio.vercel.app/assets/images/aboubakr-hero.webp",
+      "image": "https://professional-portfolio-v2-git-redesign-v2-aboubakr-portfolio.vercel.app/assets/images/aboubakr-hero-v4.webp",
       "alumniOf": {"@type": "CollegeOrUniversity", "name": "Işık University"},
       "knowsAbout": ["Clinical engineering", "Medical-device quality", "ISO 13485", "MATLAB", "Biomedical signal processing", "Healthcare data"],
       "sameAs": [
@@ -96,7 +98,10 @@
 
       <div class="hero-visual reveal" aria-label="Aboubakr Ibrahim in a biomedical imaging and healthcare intelligence environment">
         <div class="portrait-frame">
-          <img src="assets/images/aboubakr-hero-v4.webp" width="1672" height="941" fetchpriority="high" alt="AI-assisted branded portrait of Aboubakr Ibrahim in a biomedical engineering environment with clinical imaging and biosignal visuals">
+          <picture>
+            <source srcset="assets/images/aboubakr-hero-v4.webp" type="image/webp">
+            <img id="hero-portrait" src="assets/images/aboubakr-hero.png" data-fallback="assets/images/aboubakr-hero-v2.webp" width="1672" height="941" fetchpriority="high" decoding="async" alt="AI-assisted branded portrait of Aboubakr Ibrahim in a biomedical engineering environment with clinical imaging and biosignal visuals">
+          </picture>
           <div class="portrait-shade"></div>
         </div>
         <div class="floating-card card-signal" aria-hidden="true">
