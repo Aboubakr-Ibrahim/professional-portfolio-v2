@@ -28,19 +28,19 @@ a,button,summary{touch-action:manipulation}
 .hero-name{margin:.25rem 0 1.25rem!important;text-wrap:balance}
 .hero-name span,.hero-ready .hero-name span{
   background-image:linear-gradient(100deg,#f7fdff 0%,#35deee 15%,#65aaff 31%,#a57cff 48%,#f0b95b 64%,#41dfbd 79%,#72aaff 91%,#f7fdff 100%)!important;
-  background-size:340% 100%!important;
+  background-size:260% 100%!important;
   background-position:0% 50%;
   color:transparent!important;
   -webkit-background-clip:text!important;
   background-clip:text!important;
-  animation:release-name-spectrum 8.4s linear infinite!important;
-  filter:drop-shadow(0 0 15px rgba(76,177,255,.16))!important;
+  animation:release-name-spectrum 5.8s linear infinite!important;
+  filter:drop-shadow(0 0 17px rgba(76,177,255,.2))!important;
   will-change:background-position;
 }
 .hero-name span:last-child,.hero-ready .hero-name span:last-child{animation-delay:-4.2s!important}
 @keyframes release-name-spectrum{
   from{background-position:0% 50%}
-  to{background-position:170% 50%}
+  to{background-position:100% 50%}
 }
 
 /* Living AB identity: metallic breath, ECG trace and a restrained medical flare. */
@@ -54,6 +54,18 @@ a,button,summary{touch-action:manipulation}
   stroke-dasharray:245 18!important;
   stroke-dashoffset:0;
   animation:release-logo-metal 7.2s ease-in-out infinite!important;
+}
+.brand-mark-ab .ab-letter-scan{
+  fill:none;
+  stroke:#29deee;
+  stroke-width:4.4;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  stroke-dasharray:24 142;
+  stroke-dashoffset:166;
+  opacity:1;
+  animation:release-logo-a-trace 3.7s cubic-bezier(.42,0,.2,1) infinite!important;
+  filter:drop-shadow(0 0 7px rgba(36,222,238,.95));
 }
 .brand-mark-ab .ab-pulse{
   stroke-dasharray:28 162!important;
@@ -95,6 +107,13 @@ a,button,summary{touch-action:manipulation}
   16%{opacity:1}
   72%{stroke-dashoffset:0;opacity:1}
   100%{stroke-dashoffset:-190;opacity:.18}
+}
+@keyframes release-logo-a-trace{
+  0%{stroke-dashoffset:166;opacity:0}
+  9%{opacity:1}
+  63%{stroke-dashoffset:0;opacity:1}
+  82%{stroke-dashoffset:-70;opacity:.72}
+  100%{stroke-dashoffset:-166;opacity:0}
 }
 @keyframes release-logo-glow{
   0%{stroke-dashoffset:190;opacity:0}
