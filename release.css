@@ -26,6 +26,87 @@ a,button,summary{touch-action:manipulation}
 .hero-content{padding-top:clamp(12px,3vh,40px)!important}
 .hero-identity-lockup{margin-bottom:28px}
 .hero-name{margin:.25rem 0 1.25rem!important;text-wrap:balance}
+.hero-name span,.hero-ready .hero-name span{
+  background-image:linear-gradient(100deg,#f7fdff 0%,#35deee 15%,#65aaff 31%,#a57cff 48%,#f0b95b 64%,#41dfbd 79%,#72aaff 91%,#f7fdff 100%)!important;
+  background-size:340% 100%!important;
+  background-position:0% 50%;
+  color:transparent!important;
+  -webkit-background-clip:text!important;
+  background-clip:text!important;
+  animation:release-name-spectrum 8.4s linear infinite!important;
+  filter:drop-shadow(0 0 15px rgba(76,177,255,.16))!important;
+  will-change:background-position;
+}
+.hero-name span:last-child,.hero-ready .hero-name span:last-child{animation-delay:-4.2s!important}
+@keyframes release-name-spectrum{
+  from{background-position:0% 50%}
+  to{background-position:170% 50%}
+}
+
+/* Living AB identity: metallic breath, ECG trace and a restrained medical flare. */
+.brand-mark-ab svg{
+  transform-box:fill-box;
+  transform-origin:center;
+  animation:release-logo-float 6.8s cubic-bezier(.4,0,.2,1) infinite!important;
+  will-change:transform,filter;
+}
+.brand-mark-ab .ab-outline{
+  stroke-dasharray:245 18!important;
+  stroke-dashoffset:0;
+  animation:release-logo-metal 7.2s ease-in-out infinite!important;
+}
+.brand-mark-ab .ab-pulse{
+  stroke-dasharray:28 162!important;
+  stroke-dashoffset:190!important;
+  opacity:1!important;
+  animation:release-logo-ecg 3.7s cubic-bezier(.42,0,.2,1) infinite!important;
+  filter:drop-shadow(0 0 7px rgba(24,224,239,.9))!important;
+}
+.brand-mark-ab .ab-pulse-glow{
+  stroke-dasharray:18 172!important;
+  stroke-dashoffset:190!important;
+  opacity:.68!important;
+  animation:release-logo-glow 3.7s cubic-bezier(.42,0,.2,1) infinite!important;
+  filter:blur(2.5px) drop-shadow(0 0 9px #20dfee)!important;
+}
+.brand-mark-ab .ab-plus{
+  transform-box:fill-box;
+  transform-origin:center;
+  animation:release-logo-plus 3.7s ease-in-out infinite!important;
+}
+.brand-name b,.hero-identity-lockup b{
+  background-image:linear-gradient(100deg,#f8fdff 0%,#6ddcff 34%,#a57cff 58%,#f0b95b 78%,#f8fdff 100%)!important;
+  background-size:260% 100%!important;
+  color:transparent!important;
+  -webkit-background-clip:text!important;
+  background-clip:text!important;
+  animation:release-wordmark-spectrum 9s linear infinite!important;
+}
+@keyframes release-logo-float{
+  0%,100%{transform:translate3d(0,0,0) scale(1);filter:drop-shadow(0 0 7px rgba(36,215,233,.2))}
+  50%{transform:translate3d(0,-1.5px,0) scale(1.012);filter:drop-shadow(0 0 13px rgba(36,215,233,.34))}
+}
+@keyframes release-logo-metal{
+  0%,100%{stroke-dashoffset:0;opacity:.82}
+  48%{stroke-dashoffset:-38;opacity:1}
+}
+@keyframes release-logo-ecg{
+  0%{stroke-dashoffset:190;opacity:.2}
+  16%{opacity:1}
+  72%{stroke-dashoffset:0;opacity:1}
+  100%{stroke-dashoffset:-190;opacity:.18}
+}
+@keyframes release-logo-glow{
+  0%{stroke-dashoffset:190;opacity:0}
+  18%{opacity:.72}
+  72%{stroke-dashoffset:0;opacity:.72}
+  100%{stroke-dashoffset:-190;opacity:0}
+}
+@keyframes release-logo-plus{
+  0%,65%,100%{transform:scale(1);opacity:.78;filter:none}
+  78%{transform:scale(1.3);opacity:1;filter:drop-shadow(0 0 9px #21e0ef)}
+}
+@keyframes release-wordmark-spectrum{to{background-position:200% 50%}}
 .hero-hook{line-height:1.12!important;text-wrap:balance}
 .hero-lead{color:#b9cbd3!important}
 .hero-actions .button{min-height:54px;border-radius:14px}
@@ -124,4 +205,5 @@ a,button,summary{touch-action:manipulation}
 }
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  .hero-name span,.brand-name b,.hero-identity-lockup b{background-position:48% 50%!important}
 }
