@@ -358,6 +358,71 @@ document.querySelectorAll('.brand-mark-ab .ab-pulse').forEach(pulse => {
   pulse.after(glow);
 });
 
+/* Identity motion is driven directly so the preserved legacy CSS cannot
+   cancel the two most important first-impression animations. */
+const identityLogos = [...document.querySelectorAll('.brand-mark-ab svg')];
+identityLogos.forEach(svg => {
+  const source = svg.querySelector('.ab-pulse');
+  if (!source || svg.querySelector('.ab-signal-base')) return;
+
+  const base = source.cloneNode();
+  base.removeAttribute('class');
+  base.classList.add('ab-signal-base');
+  base.setAttribute('pathLength', '100');
+  base.style.setProperty('fill', 'none', 'important');
+  base.style.setProperty('stroke', '#18dceb', 'important');
+  base.style.setProperty('stroke-width', '4.1', 'important');
+  base.style.setProperty('stroke-linecap', 'round', 'important');
+  base.style.setProperty('stroke-linejoin', 'round', 'important');
+  base.style.setProperty('stroke-dasharray', 'none', 'important');
+  base.style.setProperty('stroke-dashoffset', '0', 'important');
+  base.style.setProperty('opacity', '.96', 'important');
+  base.style.setProperty('filter', 'drop-shadow(0 0 5px rgba(24,220,235,.82))', 'important');
+
+  const sweep = source.cloneNode();
+  sweep.removeAttribute('class');
+  sweep.classList.add('ab-signal-sweep');
+  sweep.setAttribute('pathLength', '100');
+  sweep.style.setProperty('fill', 'none', 'important');
+  sweep.style.setProperty('stroke', '#ffffff', 'important');
+  sweep.style.setProperty('stroke-width', '6', 'important');
+  sweep.style.setProperty('stroke-linecap', 'round', 'important');
+  sweep.style.setProperty('stroke-linejoin', 'round', 'important');
+  sweep.style.setProperty('stroke-dasharray', '18 82', 'important');
+  sweep.style.setProperty('filter', 'drop-shadow(0 0 5px #21dfef) drop-shadow(0 0 12px #21dfef)', 'important');
+
+  source.style.setProperty('display', 'none', 'important');
+  svg.querySelector('.ab-pulse-glow')?.style.setProperty('display', 'none', 'important');
+  source.after(base, sweep);
+});
+
+const livingName = [...document.querySelectorAll('.hero-name span')];
+const identityStart = performance.now();
+let previousIdentityFrame = 0;
+const animateIdentity = now => {
+  if (now - previousIdentityFrame >= 32) {
+    const elapsed = now - identityStart;
+    const phase = (elapsed / 2600) % 1;
+    const namePosition = (elapsed / 24) % 420;
+    const hue = 34 * Math.sin(elapsed / 760);
+
+    document.querySelectorAll('.ab-signal-sweep').forEach(signal => {
+      signal.style.setProperty('stroke-dashoffset', String(100 - phase * 200), 'important');
+      signal.style.setProperty('opacity', phase < .04 || phase > .96 ? '.12' : '1', 'important');
+    });
+
+    livingName.forEach((line, index) => {
+      line.style.setProperty('background-image', 'linear-gradient(100deg,#f5fdff 0%,#18dceb 18%,#3d9cff 38%,#9b70ff 58%,#f1b84f 76%,#ff79c9 88%,#f5fdff 100%)', 'important');
+      line.style.setProperty('background-size', '420% 100%', 'important');
+      line.style.setProperty('background-position', `${namePosition + index * 46}% 50%`, 'important');
+      line.style.setProperty('filter', `drop-shadow(0 0 18px rgba(70,170,255,.26)) hue-rotate(${hue}deg)`, 'important');
+    });
+    previousIdentityFrame = now;
+  }
+  requestAnimationFrame(animateIdentity);
+};
+requestAnimationFrame(animateIdentity);
+
 if (!prefersReducedMotion && 'IntersectionObserver' in window) {
   const motionObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
