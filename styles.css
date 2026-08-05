@@ -2941,3 +2941,87 @@ body.modal-open{touch-action:none}
   .hero-name span,.hero-ready .hero-name span{animation:aboubakr-spectrum-live 12s linear infinite!important}
   .project-card::before,.project-card h3,.project-card>a{animation:none!important}
 }
+
+/* ================================================================
+   V7 RELEASE FOUNDATION — resilient hero and unified motion cadence
+   This final layer intentionally preserves the established identities while
+   resolving the last cascade conflicts in the first viewport.
+   ================================================================ */
+:root{
+  --motion-fast:220ms;
+  --motion-ui:360ms;
+  --motion-enter:760ms;
+  --motion-ambient:10s;
+  --ease-cinematic:cubic-bezier(.2,.72,.18,1);
+}
+.portrait-frame{
+  background:
+    linear-gradient(90deg,rgba(1,6,13,.42),transparent 55%),
+    url("assets/images/aboubakr-hero-v2.webp") center/cover no-repeat,
+    #03101c;
+}
+.portrait-frame picture{display:block;width:100%;height:100%}
+.portrait-frame img{
+  opacity:0;
+  transform:scale(1.035);
+  transition:opacity var(--motion-enter) var(--ease-cinematic),transform 12s var(--ease-cinematic),filter 1.2s ease!important;
+}
+.hero-image-ready .portrait-frame img{opacity:1}
+.hero-ready.hero-image-ready .portrait-frame img{transform:scale(1)}
+.hero-image-failed .portrait-frame::after{
+  content:"Biomedical engineering · clinical systems · healthcare data";
+  position:absolute;
+  right:3rem;
+  bottom:2.2rem;
+  z-index:4;
+  color:rgba(224,247,255,.7);
+  font:600 .58rem var(--font-mono);
+  letter-spacing:.15em;
+  text-transform:uppercase;
+}
+.hero-name span{
+  animation:aboubakr-spectrum-live 11s linear infinite!important;
+  will-change:background-position;
+}
+.hero-proof-mini a,.module-card,.pillar,.project-card,.credential-card,.language-card,.recommendation-card,.cv-primary,.cv-on-request,.contact-action{
+  transition-duration:var(--motion-ui)!important;
+  transition-timing-function:var(--ease-cinematic)!important;
+}
+@media(max-width:760px){
+  .hero-image-failed .portrait-frame::after{right:1.25rem;bottom:1.25rem;max-width:70%;text-align:right}
+}
+@media(prefers-reduced-motion:reduce){
+  .portrait-frame img{opacity:1;transform:none!important;transition:none!important}
+  .hero-name span{animation:none!important;background-position:48% 50%!important}
+}
+
+/* V7.1 — persistent name color and a true left-to-right AB ECG sweep. */
+.hero-name span,.hero-ready .hero-name span{
+  background-repeat:no-repeat!important;
+  background-size:300% 100%!important;
+  background-position:50% 50%;
+  animation:aboubakr-color-travel-safe 8s ease-in-out infinite!important;
+}
+.hero-name span:last-child,.hero-ready .hero-name span:last-child{
+  animation-delay:-4s!important;
+}
+@keyframes aboubakr-color-travel-safe{
+  0%,100%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+}
+.brand-mark-ab .ab-signal-base{
+  opacity:.18!important;
+}
+.brand-mark-ab .ab-signal-sweep{
+  stroke-dasharray:100!important;
+  stroke-dashoffset:100;
+  opacity:0;
+}
+@media(prefers-reduced-motion:reduce){
+  .hero-name span,.hero-ready .hero-name span{
+    animation:none!important;
+    background-position:50% 50%!important;
+  }
+  .brand-mark-ab .ab-signal-base{opacity:.72!important}
+  .brand-mark-ab .ab-signal-sweep{display:none!important}
+}

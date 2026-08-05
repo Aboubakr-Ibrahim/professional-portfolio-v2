@@ -5,6 +5,25 @@ const commandPalette = document.querySelector('#command-palette');
 const commandTrigger = document.querySelector('.command-trigger');
 const commandClose = document.querySelector('.command-close');
 
+// Keep the most important visual resilient. If a deployment serves an older
+// asset set or a browser cannot decode the preferred source, the portrait
+// falls back without leaving the first viewport empty.
+const heroPortrait = document.querySelector('#hero-portrait');
+if (heroPortrait) {
+  const markHeroImageReady = () => document.body.classList.add('hero-image-ready');
+  if (heroPortrait.complete && heroPortrait.naturalWidth > 0) markHeroImageReady();
+  heroPortrait.addEventListener('load', markHeroImageReady, { once: true });
+  heroPortrait.addEventListener('error', () => {
+    const fallback = heroPortrait.dataset.fallback;
+    if (fallback && heroPortrait.getAttribute('src') !== fallback) {
+      heroPortrait.closest('picture')?.querySelector('source')?.remove();
+      heroPortrait.setAttribute('src', fallback);
+    } else {
+      document.body.classList.add('hero-image-failed');
+    }
+  });
+}
+
 requestAnimationFrame(() => document.body.classList.add('hero-ready'));
 
 document.addEventListener('visibilitychange', () => {
@@ -338,6 +357,92 @@ document.querySelectorAll('.brand-mark-ab .ab-pulse').forEach(pulse => {
   glow.setAttribute('aria-hidden', 'true');
   pulse.after(glow);
 });
+
+/* Identity motion is driven directly so the preserved legacy CSS cannot
+   cancel the two most important first-impression animations. */
+const identityLogos = [...document.querySelectorAll('.brand-mark-ab svg')];
+identityLogos.forEach(svg => {
+  const source = svg.querySelector('.ab-pulse');
+  if (!source || svg.querySelector('.ab-signal-base')) return;
+
+  const base = source.cloneNode();
+  base.removeAttribute('class');
+  base.classList.add('ab-signal-base');
+  base.setAttribute('pathLength', '100');
+  base.style.setProperty('fill', 'none', 'important');
+  base.style.setProperty('stroke', '#18dceb', 'important');
+  base.style.setProperty('stroke-width', '4.1', 'important');
+  base.style.setProperty('stroke-linecap', 'round', 'important');
+  base.style.setProperty('stroke-linejoin', 'round', 'important');
+  base.style.setProperty('stroke-dasharray', 'none', 'important');
+  base.style.setProperty('stroke-dashoffset', '0', 'important');
+  base.style.setProperty('opacity', '.18', 'important');
+  base.style.setProperty('filter', 'drop-shadow(0 0 3px rgba(24,220,235,.35))', 'important');
+
+  const sweep = source.cloneNode();
+  sweep.removeAttribute('class');
+  sweep.classList.add('ab-signal-sweep');
+  sweep.setAttribute('pathLength', '100');
+  sweep.style.setProperty('fill', 'none', 'important');
+  sweep.style.setProperty('stroke', '#ffffff', 'important');
+  sweep.style.setProperty('stroke-width', '6', 'important');
+  sweep.style.setProperty('stroke-linecap', 'round', 'important');
+  sweep.style.setProperty('stroke-linejoin', 'round', 'important');
+  sweep.style.setProperty('stroke-dasharray', '100', 'important');
+  sweep.style.setProperty('stroke-dashoffset', '100', 'important');
+  sweep.style.setProperty('filter', 'drop-shadow(0 0 5px #21dfef) drop-shadow(0 0 12px #21dfef)', 'important');
+
+  source.style.setProperty('display', 'none', 'important');
+  svg.querySelector('.ab-pulse-glow')?.style.setProperty('display', 'none', 'important');
+  source.after(base, sweep);
+});
+
+const livingName = [...document.querySelectorAll('.hero-name span')];
+const identityStart = performance.now();
+let previousIdentityFrame = 0;
+const animateIdentity = now => {
+  if (now - previousIdentityFrame >= 32) {
+    const elapsed = now - identityStart;
+    const phase = (elapsed / 2600) % 1;
+    /* Keep the complete name visible: only the colors travel inside it. */
+    const namePosition = 50 + 50 * Math.sin(elapsed / 1700);
+    const hue = 34 * Math.sin(elapsed / 760);
+
+    document.querySelectorAll('.ab-signal-sweep').forEach(signal => {
+      /* Draw one continuous ECG trace from left to right, hold it briefly,
+         then fade before the next clean sweep. */
+      const drawStart = .08;
+      const drawEnd = .68;
+      const holdEnd = .84;
+      let offset = 100;
+      let opacity = 0;
+      if (phase >= drawStart && phase < drawEnd) {
+        const progress = (phase - drawStart) / (drawEnd - drawStart);
+        offset = 100 - progress * 100;
+        opacity = 1;
+      } else if (phase >= drawEnd && phase < holdEnd) {
+        offset = 0;
+        opacity = 1;
+      } else if (phase >= holdEnd) {
+        offset = 0;
+        opacity = 1 - (phase - holdEnd) / (1 - holdEnd);
+      }
+      signal.style.setProperty('stroke-dasharray', '100', 'important');
+      signal.style.setProperty('stroke-dashoffset', String(offset), 'important');
+      signal.style.setProperty('opacity', String(opacity), 'important');
+    });
+
+    livingName.forEach((line, index) => {
+      line.style.setProperty('background-image', 'linear-gradient(100deg,#f5fdff 0%,#18dceb 18%,#3d9cff 38%,#9b70ff 58%,#f1b84f 76%,#ff79c9 88%,#f5fdff 100%)', 'important');
+      line.style.setProperty('background-size', '420% 100%', 'important');
+      line.style.setProperty('background-position', `${Math.max(0, Math.min(100, namePosition + (index ? 8 : 0)))}% 50%`, 'important');
+      line.style.setProperty('filter', `drop-shadow(0 0 18px rgba(70,170,255,.26)) hue-rotate(${hue}deg)`, 'important');
+    });
+    previousIdentityFrame = now;
+  }
+  requestAnimationFrame(animateIdentity);
+};
+requestAnimationFrame(animateIdentity);
 
 if (!prefersReducedMotion && 'IntersectionObserver' in window) {
   const motionObserver = new IntersectionObserver(entries => {
