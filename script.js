@@ -442,7 +442,7 @@ const animateIdentity = now => {
   }
   requestAnimationFrame(animateIdentity);
 };
-requestAnimationFrame(animateIdentity);
+if (!prefersReducedMotion) requestAnimationFrame(animateIdentity);
 
 if (!prefersReducedMotion && 'IntersectionObserver' in window) {
   const motionObserver = new IntersectionObserver(entries => {

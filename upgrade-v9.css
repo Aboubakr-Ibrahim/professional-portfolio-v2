@@ -1,0 +1,210 @@
+/* Aboubakr Biomedical — V9 approval preview
+   A compact final layer for the specific issues identified during review. */
+
+:root {
+  --v9-cyan: #2cdeef;
+  --v9-blue: #66a8ff;
+  --v9-violet: #a77dff;
+  --v9-gold: #f2bc58;
+  --v9-green: #45dfbd;
+  --v9-panel: rgba(7, 25, 39, .82);
+  --v9-line: rgba(151, 211, 230, .2);
+  --v9-ease: cubic-bezier(.2, .72, .18, 1);
+}
+
+/* Hero: protect the portrait, strengthen the introduction, retain useful proof. */
+.hero {
+  min-height: clamp(830px, 100svh, 980px) !important;
+  background: #020811 !important;
+}
+
+.hero-content {
+  max-width: 710px !important;
+}
+
+.hero-name span,
+.hero-ready .hero-name span {
+  background-image: linear-gradient(96deg, #f5fdff 0%, var(--v9-cyan) 14%, var(--v9-blue) 31%, var(--v9-violet) 49%, var(--v9-gold) 66%, var(--v9-green) 82%, #f5fdff 100%) !important;
+  background-size: 320% 100% !important;
+  animation: v9-name-spectrum 9s ease-in-out infinite !important;
+}
+
+.hero-name span:last-child,
+.hero-ready .hero-name span:last-child {
+  animation-delay: -4.5s !important;
+}
+
+@keyframes v9-name-spectrum {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.hero-hook {
+  max-width: 17ch !important;
+  text-wrap: balance;
+}
+
+.hero-lead {
+  max-width: 62ch !important;
+}
+
+.portrait-frame {
+  background-image: url("assets/images/aboubakr-hero-v5.webp") !important;
+  background-position: center !important;
+}
+
+.portrait-frame img {
+  object-position: 50% center !important;
+}
+
+.portrait-shade {
+  display: block !important;
+  background:
+    linear-gradient(90deg, rgba(2, 8, 17, .92) 0%, rgba(2, 8, 17, .54) 13%, rgba(2, 8, 17, .08) 31%, transparent 62%),
+    linear-gradient(0deg, rgba(2, 8, 17, .72), transparent 28%) !important;
+}
+
+/* Three panels remain on large screens because they explain the range quickly.
+   Their positions are constrained to the image's safe left rail, away from the face. */
+.hero-visual .floating-card {
+  display: flex !important;
+  flex-direction: column;
+  width: clamp(190px, 14vw, 245px) !important;
+  max-width: 245px !important;
+  padding: 15px 17px !important;
+  border-radius: 18px !important;
+  background: linear-gradient(145deg, rgba(14, 42, 60, .66), rgba(4, 15, 27, .78)) !important;
+  border-color: rgba(165, 226, 242, .26) !important;
+  backdrop-filter: blur(20px) saturate(1.15) !important;
+  animation-duration: 10s !important;
+}
+
+.hero-visual .card-signal { top: 16% !important; left: 5% !important; }
+.hero-visual .card-imaging { top: 43% !important; left: 2% !important; }
+.hero-visual .card-quality { bottom: 14% !important; left: 7% !important; }
+
+/* About: a deliberate left reading axis rather than a floating middle column. */
+.range-manifesto {
+  padding: clamp(30px, 4.5vw, 62px) !important;
+}
+
+.range-intro {
+  display: grid !important;
+  grid-template-columns: minmax(170px, .34fr) minmax(0, 1.66fr) !important;
+  gap: clamp(28px, 5vw, 82px) !important;
+  align-items: start !important;
+}
+
+.range-intro > span {
+  padding-top: .55rem;
+  color: var(--v9-cyan) !important;
+  font: 700 .67rem var(--font-head);
+  letter-spacing: .16em;
+  line-height: 1.55;
+  text-transform: uppercase;
+}
+
+.range-intro h3 {
+  max-width: 24ch !important;
+  margin: 0 !important;
+  text-align: left !important;
+  font-size: clamp(2rem, 3.2vw, 4rem) !important;
+  line-height: 1.04 !important;
+  letter-spacing: -.045em;
+}
+
+.range-grid {
+  margin-top: clamp(32px, 5vw, 62px) !important;
+}
+
+/* ECG/HRV project: all points are clipped to the chart and tied to its guide. */
+.poincare {
+  position: relative !important;
+  overflow: hidden !important;
+  contain: paint;
+  isolation: isolate;
+}
+
+.poincare i {
+  width: 8px !important;
+  height: 8px !important;
+  margin: 0 !important;
+  transform-origin: center;
+}
+
+.poincare i:nth-of-type(1) { left: 32% !important; top: 66% !important; }
+.poincare i:nth-of-type(2) { left: 40% !important; top: 58% !important; }
+.poincare i:nth-of-type(3) { left: 48% !important; top: 50% !important; }
+.poincare i:nth-of-type(4) { left: 56% !important; top: 42% !important; }
+.poincare i:nth-of-type(5) { left: 64% !important; top: 34% !important; }
+.poincare i:nth-of-type(6) { left: 72% !important; top: 26% !important; }
+
+/* CV: keep the full card clickable, but make the exact action unmistakable. */
+.cv-primary .cv-download {
+  min-height: 48px !important;
+  padding: 0 19px !important;
+  border-color: rgba(255, 224, 155, .8) !important;
+  background: linear-gradient(100deg, #f6ca69, #e8a83c) !important;
+  color: #07131f !important;
+  box-shadow: 0 12px 30px rgba(242, 188, 88, .2), inset 0 1px rgba(255, 255, 255, .35) !important;
+}
+
+.cv-primary:focus-visible .cv-download,
+.cv-primary:hover .cv-download {
+  transform: translateY(-2px);
+  box-shadow: 0 17px 42px rgba(242, 188, 88, .32), 0 0 28px rgba(242, 188, 88, .15) !important;
+}
+
+/* Hiring close: compact, role-focused and easier to scan. */
+.contact-panel {
+  grid-template-columns: minmax(0, 1.08fr) minmax(390px, .92fr) !important;
+  gap: clamp(38px, 6vw, 92px) !important;
+}
+
+.contact-panel h2 {
+  max-width: 13ch !important;
+  font-size: clamp(2.7rem, 4.5vw, 5.15rem) !important;
+}
+
+.contact-facts {
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 12px !important;
+}
+
+.contact-facts > div,
+.contact-facts > div:first-child {
+  grid-column: auto !important;
+  min-height: 220px !important;
+  padding: 22px 18px !important;
+  justify-content: space-between;
+}
+
+.contact-facts b {
+  font-size: clamp(1rem, 1.15vw, 1.2rem) !important;
+  line-height: 1.35 !important;
+}
+
+@media (max-width: 1180px) {
+  .hero-visual .floating-card { display: none !important; }
+  .contact-panel { grid-template-columns: 1fr !important; }
+  .contact-facts > div,
+  .contact-facts > div:first-child { min-height: 150px !important; }
+}
+
+@media (max-width: 760px) {
+  .hero { min-height: auto !important; }
+  .hero-name { font-size: clamp(3.05rem, 15.2vw, 4.9rem) !important; }
+  .hero-visual { margin-top: 24px !important; }
+  .portrait-frame img { object-position: 61% center !important; }
+  .range-intro { grid-template-columns: 1fr !important; gap: 18px !important; }
+  .range-intro h3 { max-width: 100% !important; }
+  .contact-facts { grid-template-columns: 1fr !important; }
+  .contact-facts > div,
+  .contact-facts > div:first-child { min-height: 128px !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-name span,
+  .hero-ready .hero-name span { animation: none !important; background-position: 48% 50% !important; }
+  .hero-visual .floating-card { animation: none !important; }
+}

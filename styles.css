@@ -3025,3 +3025,121 @@ body.modal-open{touch-action:none}
   .brand-mark-ab .ab-signal-base{opacity:.72!important}
   .brand-mark-ab .ab-signal-sweep{display:none!important}
 }
+
+/* ================================================================
+   V8 FOUNDATION — one decisive first viewport
+   This layer stabilizes the hero while the legacy cascade is reduced
+   section by section. It deliberately keeps proof visible and the
+   portrait unobstructed.
+   ================================================================ */
+.hero{
+  min-height:clamp(820px,100svh,980px)!important;
+  grid-template-columns:minmax(520px,.88fr) minmax(610px,1.12fr)!important;
+  gap:clamp(18px,2vw,42px)!important;
+  padding:118px max(4.5vw,42px) 112px!important;
+}
+.hero-content{
+  width:auto!important;
+  max-width:700px!important;
+  padding:24px 0 72px!important;
+}
+.hero-identity-lockup{
+  margin-bottom:clamp(30px,4vh,48px)!important;
+}
+.hero-kicker{
+  max-width:680px;
+  margin-bottom:18px!important;
+  color:#8feaf4!important;
+  font-size:clamp(.58rem,.68vw,.72rem)!important;
+  line-height:1.55!important;
+}
+.hero-name{
+  margin:0 0 24px!important;
+  font-size:clamp(4.1rem,6.15vw,7.9rem)!important;
+  line-height:.82!important;
+  letter-spacing:-.068em!important;
+}
+.hero-hook{
+  max-width:660px!important;
+  margin-bottom:18px!important;
+  font-size:clamp(1.72rem,2.25vw,2.8rem)!important;
+  line-height:1.08!important;
+}
+.hero-lead{
+  max-width:655px!important;
+  color:#aac0cd!important;
+  font-size:clamp(.98rem,1.08vw,1.12rem)!important;
+  line-height:1.76!important;
+}
+.hero-actions .button{
+  min-width:218px!important;
+}
+.hero-proof-mini{
+  max-width:680px!important;
+  margin-top:22px!important;
+}
+.hero-proof-mini a{
+  min-height:92px!important;
+  padding:17px 18px!important;
+  background:linear-gradient(145deg,rgba(11,31,47,.82),rgba(5,18,30,.9))!important;
+  backdrop-filter:blur(16px);
+}
+.hero-proof-mini a:hover{
+  transform:translateY(-5px)!important;
+}
+.hero-visual{
+  height:clamp(650px,76vh,800px)!important;
+  min-height:650px!important;
+  margin:0 -7vw 0 -2vw!important;
+}
+.portrait-frame{
+  inset:0!important;
+  clip-path:polygon(9% 0,100% 0,100% 100%,0 100%,5% 52%)!important;
+}
+.portrait-frame img{
+  object-position:50% center!important;
+  filter:saturate(.97) contrast(1.055) brightness(.92)!important;
+}
+.portrait-shade{
+  background:
+    linear-gradient(90deg,#020811 0%,rgba(2,8,17,.58) 8%,rgba(2,8,17,.08) 25%,transparent 62%),
+    linear-gradient(0deg,rgba(2,8,17,.72),transparent 25%)!important;
+}
+.card-signal{top:16%!important;left:1%!important}
+.card-imaging{top:43%!important;left:-1%!important}
+.card-quality{bottom:13%!important;left:5%!important}
+.floating-card{
+  max-width:270px;
+  backdrop-filter:blur(22px) saturate(1.18)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 22px 55px rgba(0,0,0,.28)!important;
+}
+.proof-bar{
+  left:max(4.5vw,42px)!important;
+  right:max(4.5vw,42px)!important;
+  bottom:20px!important;
+  border-radius:18px!important;
+  backdrop-filter:blur(22px) saturate(1.15)!important;
+}
+@media(max-width:1180px){
+  .hero{
+    grid-template-columns:1fr!important;
+    padding-bottom:44px!important;
+  }
+  .hero-content{max-width:800px!important;padding-bottom:10px!important}
+  .hero-visual{height:650px!important;margin:12px -10vw 122px 4vw!important}
+  .proof-bar{bottom:18px!important}
+}
+@media(max-width:760px){
+  .hero{padding:98px 20px 28px!important}
+  .hero-content{padding-top:8px!important}
+  .hero-identity-lockup{margin-bottom:26px!important}
+  .hero-name{font-size:clamp(3.2rem,15.4vw,5rem)!important;line-height:.88!important}
+  .hero-hook{font-size:clamp(1.55rem,7.2vw,2.3rem)!important}
+  .hero-lead{font-size:.94rem!important;line-height:1.68!important}
+  .hero-proof-mini{grid-template-columns:1fr!important}
+  .hero-proof-mini a{min-height:76px!important}
+  .hero-visual{height:470px!important;min-height:470px!important;margin:30px -49% 184px -10%!important}
+  .portrait-frame{clip-path:none!important}
+  .portrait-frame img{object-position:59% center!important}
+  .proof-bar{left:20px!important;right:20px!important}
+}
