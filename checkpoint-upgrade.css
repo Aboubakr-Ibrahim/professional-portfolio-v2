@@ -1,0 +1,164 @@
+/* Aboubakr Biomedical — checkpoint upgrade, 2026-08-07
+   A deliberately small final layer for readability and mobile hero integrity. */
+
+:root{
+  --upgrade-text:#eef7fa;
+  --upgrade-body:#b5c8d1;
+  --upgrade-muted:#8fa8b5;
+  --upgrade-surface:rgba(8,27,42,.86);
+  --upgrade-line:rgba(132,199,222,.20);
+  --upgrade-reading:68ch;
+}
+
+html{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility}
+body{
+  color:var(--upgrade-text);
+  font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:clamp(1rem,.965rem + .12vw,1.075rem);
+  line-height:1.65;
+  letter-spacing:-.008em;
+}
+
+/* Readable editorial rhythm: never stretch prose into uneven justified rivers. */
+p,li,blockquote,small{
+  text-align:left;
+  text-wrap:pretty;
+}
+p{color:var(--upgrade-body)}
+h1,h2,h3,h4{
+  color:var(--upgrade-text);
+  font-family:"Space Grotesk",Inter,system-ui,sans-serif;
+  text-wrap:balance;
+}
+.section-heading,.split-heading,.console-heading{
+  text-align:left!important;
+}
+.section-heading h2,.section-heading>p,.split-heading>p,.console-heading h2,.console-heading>p{
+  margin-left:0!important;
+  margin-right:0!important;
+}
+.section-heading>p,.split-heading>p,.console-heading>p,
+.hero-lead,.range-grid p,.pillar p,.project-card p,.experience-card p,
+.quality-copy>p,.contact-panel p{
+  max-width:var(--upgrade-reading);
+  line-height:1.72;
+}
+.section-heading h2{max-width:19ch}
+.eyebrow,.section-kicker,.hero-kicker{letter-spacing:.145em}
+
+/* Calm the brightest surfaces while preserving the cinematic identity. */
+.module-card,.pillar,.experience-card,.project-card,.credential-card,
+.skill-group,.recommendation-card,.cv-primary,.cv-on-request,.contact-panel{
+  border-color:var(--upgrade-line);
+}
+.hero-lead,.section-heading p,.split-heading>p,.range-grid p,.pillar p,
+.experience-card p,.experience-card li,.project-card p,.skill-context,
+.contact-panel p{color:var(--upgrade-body)!important}
+
+/* Desktop/tablet hero retains the cinematic composition with clearer copy. */
+.hero-hook{max-width:17ch!important;letter-spacing:-.038em}
+.hero-lead{max-width:59ch!important}
+.hero-actions .button{font-size:.82rem;letter-spacing:.055em}
+.portrait-frame img{object-position:52% center}
+.hero-mobile-portrait{display:none}
+
+@media (max-width:1050px) and (min-width:761px){
+  .hero-content{width:min(660px,64vw)!important}
+  .portrait-frame img{object-position:61% center}
+}
+
+/* Mobile is a real two-part hero: readable identity first, visible portrait second. */
+@media (max-width:760px){
+  body{font-size:1rem;line-height:1.62}
+  .site-header{padding-left:16px;padding-right:16px}
+
+  .hero{
+    display:flex!important;
+    flex-direction:column!important;
+    min-height:0!important;
+    padding:88px 18px 34px!important;
+    overflow:hidden;
+    background:
+      radial-gradient(circle at 8% 10%,rgba(36,215,233,.08),transparent 34%),
+      #02070d!important;
+  }
+  .hero::before{
+    background:linear-gradient(180deg,rgba(2,7,13,.08),rgba(2,7,13,.46))!important;
+    pointer-events:none;
+  }
+  .hero::after{display:none!important}
+  .hero-content{
+    position:relative!important;
+    z-index:7!important;
+    order:1;
+    width:100%!important;
+    max-width:560px!important;
+    padding:0!important;
+  }
+  .hero-identity-lockup{margin-bottom:16px!important}
+  .hero-identity-lockup .brand-mark-ab{width:54px!important;height:44px!important}
+  .hero-identity-lockup b{font-size:.84rem!important}
+  .hero-identity-lockup small{font-size:.64rem!important}
+  .hero-kicker{margin-bottom:10px;font-size:.57rem!important}
+  .hero-name{
+    margin:0 0 15px!important;
+    font-size:clamp(3rem,15vw,4.45rem)!important;
+    line-height:.84!important;
+    letter-spacing:-.068em!important;
+  }
+  .hero-name span{width:100%!important;max-width:100%!important}
+  .hero-hook{
+    max-width:18ch!important;
+    margin-bottom:13px!important;
+    font-size:clamp(1.55rem,7.2vw,2.15rem)!important;
+    line-height:1.08!important;
+  }
+  .hero-lead{max-width:42rem!important;font-size:.96rem!important;line-height:1.66!important}
+  .hero-actions{display:grid!important;grid-template-columns:1fr!important;gap:10px!important;margin-top:22px!important}
+  .hero-actions .button{width:100%!important;min-height:52px!important}
+  .hero-proof-mini{grid-template-columns:1fr!important;max-width:none!important;margin-top:18px!important}
+  .hero-proof-mini a{min-height:76px!important;padding:14px 15px!important}
+  .hero-proof-mini a:last-child{grid-column:auto!important}
+  .hero .availability{font-size:.78rem;line-height:1.5}
+
+  .hero-mobile-portrait{
+    display:block!important;
+    position:relative;
+    width:calc(100% + 36px);
+    height:clamp(260px,72vw,390px);
+    margin:18px -18px 24px;
+    overflow:hidden;
+    border-block:1px solid rgba(81,199,226,.22);
+    background:#06131f;
+  }
+  .hero-mobile-portrait::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(180deg,rgba(2,7,13,.15),transparent 55%,rgba(2,7,13,.45));
+    pointer-events:none;
+  }
+  .hero-mobile-portrait picture,.hero-mobile-portrait img{display:block;width:100%;height:100%}
+  .hero-mobile-portrait img{
+    object-fit:cover;
+    object-position:66% center;
+    filter:saturate(1.03) contrast(1.06) brightness(.94);
+  }
+  .hero-visual,.hero .proof-bar{display:none!important}
+
+  .section,.module-console{padding-left:18px!important;padding-right:18px!important}
+  .section-heading h2,.console-heading h2{font-size:clamp(2.2rem,10.5vw,3.25rem)!important;line-height:1.02!important}
+  .range-intro h3{font-size:clamp(1.65rem,7.5vw,2.35rem);line-height:1.12}
+  .range-grid article,.skill-group,.recommendation-card{padding-left:22px!important;padding-right:22px!important}
+  .story-quote{font-size:clamp(1.45rem,7vw,2.05rem)!important;line-height:1.22!important}
+}
+
+@media (max-width:390px){
+  .hero-name{font-size:clamp(2.72rem,14.8vw,3.65rem)!important}
+  .hero-hook{font-size:clamp(1.42rem,7vw,1.9rem)!important}
+  .hero-mobile-portrait{height:280px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .portrait-frame img{transform:none!important}
+}
